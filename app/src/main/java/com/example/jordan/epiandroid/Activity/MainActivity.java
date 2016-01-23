@@ -26,9 +26,11 @@ public class MainActivity extends AppCompatActivity implements
         ModuleFragment.OnFragmentInteractionListener,
         PlanningFragment.OnFragmentInteractionListener,
         ProfileFragment.OnFragmentInteractionListener {
+
     private DrawerLayout mDrawer;
     private NavigationView nvDrawer;
     private Toolbar toolbar;
+    private int currentFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -78,37 +80,44 @@ public class MainActivity extends AppCompatActivity implements
         // Create a new fragment and specify the planet to show based on
         // position
         Fragment fragment = null;
-
+        int newFragmentId;
         Class fragmentClass;
-        switch(menuItem.getItemId()) {
-            case R.id.nav_modules:
-                Log.v("select row", "module");
-                fragmentClass = ModuleFragment.class;
-                break;
-            case R.id.nav_planning:
-                fragmentClass = PlanningFragment.class;
-                break;
-            case R.id.nav_profile:
-                fragmentClass = ProfileFragment.class;
-                break;
-            default:
-                fragmentClass = ModuleFragment.class;
+
+        Log.v("FRAGMENT","1 Current fragment : "  +menuItem.getItemId());
+        newFragmentId = menuItem.getItemId();
+        if (newFragmentId != currentFragment) {
+            Log.v("FRAGMENT","2 Current fragment : "  +menuItem.getItemId());
+            switch (menuItem.getItemId()) {
+                case R.id.nav_modules:
+                    Log.v("select row", "module");
+                    fragmentClass = ModuleFragment.class;
+                    break;
+                case R.id.nav_planning:
+                    fragmentClass = PlanningFragment.class;
+                    break;
+                case R.id.nav_profile:
+                    fragmentClass = ProfileFragment.class;
+                    break;
+                default:
+                    fragmentClass = ModuleFragment.class;
+            }
+            currentFragment = menuItem.getItemId();
+
+            try {
+                fragment = (Fragment) fragmentClass.newInstance();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+            // Insert the fragment by replacing any existing fragment
+            FragmentManager fragmentManager = getSupportFragmentManager();
+            fragmentManager.beginTransaction().replace(R.id.fragment_layout, fragment).commit();
+
+            // Highlight the selected item, update the title, and close the drawer
+            menuItem.setChecked(true);
+            setTitle(menuItem.getTitle());
+            mDrawer.closeDrawers();
         }
-
-        try {
-            fragment = (Fragment) fragmentClass.newInstance();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        // Insert the fragment by replacing any existing fragment
-        FragmentManager fragmentManager = getSupportFragmentManager();
-        fragmentManager.beginTransaction().replace(R.id.fragment_layout, fragment).commit();
-
-        // Highlight the selected item, update the title, and close the drawer
-        menuItem.setChecked(true);
-        setTitle(menuItem.getTitle());
-        mDrawer.closeDrawers();
     }
 
     @Override
