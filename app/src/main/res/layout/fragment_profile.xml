@@ -1,10 +1,136 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.example.jordan.epiandroid.Fragment.ProfileFragment.ProfileFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView android:layout_width="match_parent" android:layout_height="match_parent"
-        android:text="Profile fragment" />
+    <LinearLayout
+        android:id="@+id/ll_search"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:weightSum="1">
 
-</FrameLayout>
+        <EditText
+            android:id="@+id/et_search_login"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginBottom="5dp"/>
+        <Button
+            android:id="@+id/b_search"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="@string/button_search"/>
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/tv_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Jean Michel Truelle"
+        android:layout_below="@+id/ll_search"
+        android:textStyle="bold"
+        android:textSize="@dimen/text_size"/>
+    <TextView
+        android:id="@+id/tv_year"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/ll_search"
+        android:layout_toRightOf="@+id/tv_name"
+        android:paddingLeft="@dimen/padding_tv_profile"
+        android:text="3ieme année"
+        android:textStyle="italic"/>
+    <ImageView
+        android:id="@+id/iv_profile_picture"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/icon_epiandroid"
+        android:layout_below="@+id/tv_name"/>
+    <TextView
+        android:id="@+id/tv_login"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="login"
+        android:layout_below="@+id/tv_name"
+        android:layout_toRightOf="@+id/iv_profile_picture"/>
+    <TextView
+        android:id="@+id/tv_promo_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/tv_promo"
+        android:layout_below="@+id/tv_login"
+        android:layout_toRightOf="@+id/iv_profile_picture"
+        android:paddingTop="@dimen/padding_tv_profile"/>
+    <TextView
+        android:id="@+id/tv_promo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tv_promo_title"
+        android:layout_toRightOf="@+id/iv_profile_picture"
+        android:text="2018"
+        android:textSize="@dimen/text_size"
+        android:textStyle="bold"/>
+    <TextView
+        android:id="@+id/tv_credits_title"
+        android:text="@string/tv_credits"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tv_promo"
+        android:layout_toRightOf="@+id/iv_profile_picture"
+        android:paddingTop="@dimen/padding_tv_profile"/>
+    <TextView
+        android:id="@+id/tv_credits"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tv_credits_title"
+        android:layout_toRightOf="@+id/iv_profile_picture"
+        android:textStyle="bold"
+        android:text="credits"
+        android:textSize="@dimen/text_size"/>
+    <TextView
+        android:id="@+id/tv_gpa_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/tv_gpa"
+        android:layout_below="@+id/tv_credits"
+        android:layout_toRightOf="@+id/iv_profile_picture"
+        android:paddingTop="@dimen/padding_tv_profile"/>
+    <TextView
+        android:id="@+id/tv_gpa"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@+id/iv_profile_picture"
+        android:layout_below="@+id/tv_gpa_title"
+        android:text="gpa"
+        android:textStyle="bold"
+        android:textSize="@dimen/text_size"/>
+    <TextView
+        android:id="@+id/tv_mail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/iv_profile_picture"
+        android:text="jeanmichel.truelle@epitech.eu"
+        android:textColor="@color/colorBlue"/>
+    <TextView
+        android:id="@+id/tv_phone_number"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tv_mail"
+        android:text="0615341436"
+        android:textColor="@color/colorBlue"
+        android:paddingTop="@dimen/padding_tv_profile"/>
+    <TextView
+        android:id="@+id/tv_netsoul_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tv_phone_number"
+        android:paddingTop="@dimen/netsoul_title_padding_top"
+        android:text="@string/tv_netsoul"/>
+    <TextView
+        android:id="@+id/tv_netsoul"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tv_netsoul_title"
+        android:text="no logs"/>
+
+</RelativeLayout>
