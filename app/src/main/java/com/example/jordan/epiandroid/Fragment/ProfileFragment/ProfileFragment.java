@@ -104,6 +104,11 @@ public class ProfileFragment extends Fragment {
         startActivity(intent);
     }
 
+    @OnClick(R.id.b_search)
+    public void search() {
+        // TODO : requete API sur et_search_login.getText(), modifier tout les champs avec les nouvelles info :)
+    }
+
     /**
      * Use this factory method to create a new instance of
      * this fragment using the provided parameters.
