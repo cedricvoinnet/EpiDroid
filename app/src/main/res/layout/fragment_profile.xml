@@ -29,6 +29,7 @@
         android:layout_height="wrap_content"
         android:text="Jean Michel Truelle"
         android:layout_below="@+id/ll_search"
+        android:paddingLeft="@dimen/padding_tv_profile"
         android:textStyle="bold"
         android:textSize="@dimen/text_size"/>
     <TextView
@@ -45,6 +46,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@drawable/icon_epiandroid"
+        android:paddingLeft="@dimen/padding_tv_profile"
         android:layout_below="@+id/tv_name"/>
     <TextView
         android:id="@+id/tv_login"
@@ -110,6 +112,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/iv_profile_picture"
         android:text="jeanmichel.truelle@epitech.eu"
+        android:paddingLeft="@dimen/padding_tv_profile"
         android:textColor="@color/colorBlue"/>
     <TextView
         android:id="@+id/tv_phone_number"
@@ -118,6 +121,7 @@
         android:layout_below="@+id/tv_mail"
         android:text="0615341436"
         android:textColor="@color/colorBlue"
+        android:paddingLeft="@dimen/padding_tv_profile"
         android:paddingTop="@dimen/padding_tv_profile"/>
     <TextView
         android:id="@+id/tv_netsoul_title"
@@ -125,12 +129,14 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/tv_phone_number"
         android:paddingTop="@dimen/netsoul_title_padding_top"
+        android:paddingLeft="@dimen/padding_tv_profile"
         android:text="@string/tv_netsoul"/>
     <TextView
         android:id="@+id/tv_netsoul"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/tv_netsoul_title"
+        android:paddingLeft="@dimen/padding_tv_profile"
         android:text="no logs"/>
 
 </RelativeLayout>

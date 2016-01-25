@@ -9,4 +9,7 @@
     <dimen name="padding_tv_profile">10dp</dimen>
     <dimen name="text_size">15sp</dimen>
     <dimen name="netsoul_title_padding_top">20dp</dimen>
+
+    <dimen name="big_field_textsize">20dp</dimen>
+    <dimen name="little_field_textsize">15dp</dimen>
 </resources>

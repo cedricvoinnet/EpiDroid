@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+
+    <TextView
+        android:id="@+id/tv_hour"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="11:00 - 13:00"
+        android:textSize="@dimen/big_field_textsize"
+        android:textColor="@color/colorBlue"
+        android:textStyle="bold"/>
+    <TextView
+        android:id="@+id/tv_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tv_hour"
+        android:text="Conférence de mon Q"
+        android:textSize="@dimen/big_field_textsize"/>
+    <TextView
+        android:id="@+id/tv_module"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tv_name"
+        android:textSize="@dimen/little_field_textsize"
+        android:text="module"/>
+    <TextView
+        android:id="@+id/tv_classroom"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tv_module"
+        android:text="p42"
+        android:textColor="@color/colorBrown"
+        android:textSize="@dimen/little_field_textsize"/>
+</RelativeLayout>

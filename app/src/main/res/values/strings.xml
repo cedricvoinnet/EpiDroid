@@ -26,4 +26,7 @@
     <string name="tv_credits">Earned credits</string>
     <string name="tv_gpa">G.P.A.</string>
     <string name="tv_netsoul">Netsoul :</string>
+
+    <!--Planning Activity-->
+    <string name="btn_prev_day">&lt;&lt;</string>
 </resources>

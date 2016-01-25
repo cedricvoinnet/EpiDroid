@@ -4,16 +4,28 @@ import android.app.Activity;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.ListView;
+import android.widget.TextView;
 
+import com.example.jordan.epiandroid.Model.PlanningItem;
 import com.example.jordan.epiandroid.R;
+import com.example.jordan.epiandroid.Utils.MyArrayAdapter;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import butterknife.Bind;
+import butterknife.ButterKnife;
 
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
- * {@link PlanningFragment.OnFragmentInteractionListener} interface
+ * {@link OnFragmentInteractionListener} interface
  * to handle interaction events.
  * Use the {@link PlanningFragment#newInstance} factory method to
  * create an instance of this fragment.
@@ -23,6 +35,15 @@ public class PlanningFragment extends Fragment {
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
+    @Bind(R.id.btn_prev_day)
+    Button btnPrevDay;
+    @Bind(R.id.date)
+    TextView date;
+    @Bind(R.id.btn_next_day)
+    Button btnNextDay;
+    @Bind(R.id.lv_planning)
+    ListView lvPlanning;
+    private View view;
 
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -65,7 +86,31 @@ public class PlanningFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_planning, container, false);
+        view = inflater.inflate(R.layout.fragment_planning, container, false);
+        initMembers();
+        ButterKnife.bind(this, view);
+        return view;
+    }
+
+    private void initMembers() {
+        ListView lvPlanning = (ListView) view.findViewById(R.id.lv_planning);
+        List<PlanningItem> test = new ArrayList<PlanningItem>();
+        test.add(new PlanningItem("Activité de merde", "11:00 - 13:00", "B42 ta mere", "p25"));
+        test.add(new PlanningItem("Activité de merde", "11:00 - 13:00", "B42 ta mere", "p25"));
+        test.add(new PlanningItem("Activité de merde", "11:00 - 13:00", "B42 ta mere", "p25"));
+        test.add(new PlanningItem("Activité de merde", "11:00 - 13:00", "B42 ta mere", "p25"));
+        test.add(new PlanningItem("Activité de merde", "11:00 - 13:00", "B42 ta mere", "p25"));
+        test.add(new PlanningItem("Activité de merde", "11:00 - 13:00", "B42 ta mere", "p25"));
+        test.add(new PlanningItem("Activité de merde", "11:00 - 13:00", "B42 ta mere", "p25"));
+        test.add(new PlanningItem("Activité de merde", "11:00 - 13:00", "B42 ta mere", "p25"));
+        test.add(new PlanningItem("Activité de merde", "11:00 - 13:00", "B42 ta mere", "p25"));
+        test.add(new PlanningItem("Activité de merde", "11:00 - 13:00", "B42 ta mere", "p25"));
+        test.add(new PlanningItem("Activité de merde", "11:00 - 13:00", "B42 ta mere", "p25"));
+        test.add(new PlanningItem("Activité de merde", "11:00 - 13:00", "B42 ta mere", "p25"));
+        MyArrayAdapter adapter = new MyArrayAdapter(getContext(), R.layout.row_planning, test);
+        if (lvPlanning == null)
+            Log.v("ERROR", "list = NULL");
+        lvPlanning.setAdapter(adapter);
     }
 
     // TODO: Rename method, update argument and hook method into UI event
@@ -90,6 +135,12 @@ public class PlanningFragment extends Fragment {
     public void onDetach() {
         super.onDetach();
         mListener = null;
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        ButterKnife.unbind(this);
     }
 
     /**
