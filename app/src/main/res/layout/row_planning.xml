@@ -33,4 +33,10 @@
         android:text="p42"
         android:textColor="@color/colorBrown"
         android:textSize="@dimen/little_field_textsize"/>
+    <Button
+        android:id="@+id/b_validate_token"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/btn_validate_token"
+        android:layout_alignParentRight="true"/>
 </RelativeLayout>

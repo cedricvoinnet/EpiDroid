@@ -20,5 +20,5 @@
         android:layout_height="wrap_content"
         android:text="date"
         android:layout_below="@+id/tv_content"
-        android:layout_toRightOf="@+id/iv_profile_picture" />
+        android:layout_toRightOf="@+id/iv_profile_picture"/>
 </RelativeLayout>
