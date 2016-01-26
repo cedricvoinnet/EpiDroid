@@ -1,4 +1,4 @@
-package com.example.jordan.epiandroid.Fragment.ModuleFragment;
+package com.example.jordan.epiandroid.Fragment;
 
 import android.app.Activity;
 import android.net.Uri;
@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
 
+import com.example.jordan.epiandroid.Adapter.ModuleArrayAdapter;
 import com.example.jordan.epiandroid.Model.ModuleItem;
 import com.example.jordan.epiandroid.Model.Project;
 import com.example.jordan.epiandroid.R;

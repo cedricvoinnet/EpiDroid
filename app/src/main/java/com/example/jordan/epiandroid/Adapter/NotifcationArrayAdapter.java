@@ -1,4 +1,4 @@
-package com.example.jordan.epiandroid.Fragment.ModuleFragment;
+package com.example.jordan.epiandroid.Adapter;
 
 import android.content.Context;
 import android.content.Intent;
@@ -6,24 +6,26 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.example.jordan.epiandroid.Activity.ProjectsActivity;
 import com.example.jordan.epiandroid.Model.ModuleItem;
+import com.example.jordan.epiandroid.Model.Notification;
 import com.example.jordan.epiandroid.R;
 
 import java.util.List;
 
 /**
- * Created by jordan on 25/01/2016.
+ * Created by jordan on 26/01/2016.
  */
-public class ModuleArrayAdapter extends ArrayAdapter<ModuleItem> {
+public class NotifcationArrayAdapter extends ArrayAdapter<Notification> {
     private static LayoutInflater mInflater = null;
-    private static List<ModuleItem> objs;
+    private static List<Notification> objs;
     private Context context;
 
-    public ModuleArrayAdapter(Context context, int layout, List<ModuleItem> objects) {
+    public NotifcationArrayAdapter(Context context, int layout, List<Notification> objects) {
         super(context, layout, objects);
         this.context = context;
         objs = objects;
@@ -31,27 +33,23 @@ public class ModuleArrayAdapter extends ArrayAdapter<ModuleItem> {
     }
 
     private static class ViewHolder {
-        RelativeLayout fullRow;
-        TextView tvName;
+        ImageView picture;
+        TextView tvContent;
+        TextView tvDate;
     }
 
     @Override
     public View getView(final int position, View convertView, ViewGroup parent) {
         final ViewHolder holder;
-        final ModuleItem current = objs.get(position);
+        final Notification current = objs.get(position);
         if (convertView == null) {
             holder                      = new ViewHolder();
-            convertView                 = mInflater.inflate(R.layout.row_module, parent, false);
-            holder.tvName = (TextView) convertView.findViewById(R.id.tv_module_name);
-            holder.tvName.setText(current.getName());
-            holder.tvName.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Intent intent = new Intent(context, ProjectsActivity.class);
-                    intent.putExtra("module", current);
-                    context.startActivity(intent);
-                }
-            });
+            convertView                 = mInflater.inflate(R.layout.row_notification, parent, false);
+            holder.tvContent = (TextView) convertView.findViewById(R.id.tv_content);
+            holder.tvContent.setText(current.getContent());
+            holder.tvDate = (TextView) convertView.findViewById(R.id.tv_date);
+            holder.tvDate.setText(current.getDate());
+
             convertView.setTag(holder);
         }
         else {

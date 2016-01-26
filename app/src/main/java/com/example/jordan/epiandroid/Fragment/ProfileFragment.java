@@ -1,4 +1,4 @@
-package com.example.jordan.epiandroid.Fragment.ProfileFragment;
+package com.example.jordan.epiandroid.Fragment;
 
 import android.app.Activity;
 import android.content.ActivityNotFoundException;

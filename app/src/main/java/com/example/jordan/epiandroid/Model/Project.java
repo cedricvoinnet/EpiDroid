@@ -3,8 +3,6 @@ package com.example.jordan.epiandroid.Model;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-import com.example.jordan.epiandroid.Fragment.ProfileFragment.ProfileFragment;
-
 /**
  * Created by jordan on 25/01/2016.
  */

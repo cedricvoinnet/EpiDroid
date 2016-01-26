@@ -1,19 +1,15 @@
-package com.example.jordan.epiandroid.Fragment.PlanningFragment;
+package com.example.jordan.epiandroid.Adapter;
 
 import android.content.Context;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.RadioButton;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.example.jordan.epiandroid.Model.PlanningItem;
 import com.example.jordan.epiandroid.R;
-
-import org.w3c.dom.Text;
 
 import java.util.List;
 

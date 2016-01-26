@@ -29,4 +29,7 @@
 
     <!--Planning Activity-->
     <string name="btn_prev_day">&lt;&lt;</string>
+
+    <!--DashBoardFragment-->
+    <string name="log_time_title">Temps de log :</string>
 </resources>

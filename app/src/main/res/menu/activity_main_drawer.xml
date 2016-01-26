@@ -2,17 +2,17 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <group android:checkableBehavior="single">
+        <item android:id="@+id/nav_dashboard"
+            android:icon="@drawable/icon_dashboard"
+            android:title="Dashboard" />
         <item android:id="@+id/nav_modules"
             android:icon="@drawable/icon_module"
-            android:title="Modules" />
+            android:title="Note and Modules" />
         <item android:id="@+id/nav_planning"
             android:icon="@drawable/icon_planning"
             android:title="Planning" />
         <item android:id="@+id/nav_profile"
             android:icon="@drawable/icon_profile"
             android:title="Profile" />
-        <item android:id="@+id/note"
-            android:icon="@drawable/icon_note"
-            android:title="Note and Modules" />
     </group>
 </menu>

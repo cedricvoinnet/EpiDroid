@@ -1,47 +1,34 @@
-package com.example.jordan.epiandroid.Fragment.PlanningFragment;
+package com.example.jordan.epiandroid.Fragment;
 
 import android.app.Activity;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ListView;
-import android.widget.TextView;
 
-import com.example.jordan.epiandroid.Model.PlanningItem;
+import com.example.jordan.epiandroid.Adapter.NotifcationArrayAdapter;
+import com.example.jordan.epiandroid.Model.Notification;
 import com.example.jordan.epiandroid.R;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import butterknife.Bind;
-import butterknife.ButterKnife;
-
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
- * {@link OnFragmentInteractionListener} interface
+ * {@link DashboardFragment.OnFragmentInteractionListener} interface
  * to handle interaction events.
- * Use the {@link PlanningFragment#newInstance} factory method to
+ * Use the {@link DashboardFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class PlanningFragment extends Fragment {
+public class DashboardFragment extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
-    @Bind(R.id.btn_prev_day)
-    Button btnPrevDay;
-    @Bind(R.id.date)
-    TextView date;
-    @Bind(R.id.btn_next_day)
-    Button btnNextDay;
-    @Bind(R.id.lv_planning)
-    ListView lvPlanning;
     private View view;
 
     // TODO: Rename and change types of parameters
@@ -56,11 +43,11 @@ public class PlanningFragment extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment PlanningFragment.
+     * @return A new instance of fragment DashBoardFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static PlanningFragment newInstance(String param1, String param2) {
-        PlanningFragment fragment = new PlanningFragment();
+    public static DashboardFragment newInstance(String param1, String param2) {
+        DashboardFragment fragment = new DashboardFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -68,7 +55,7 @@ public class PlanningFragment extends Fragment {
         return fragment;
     }
 
-    public PlanningFragment() {
+    public DashboardFragment() {
         // Required empty public constructor
     }
 
@@ -85,31 +72,24 @@ public class PlanningFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        view = inflater.inflate(R.layout.fragment_planning, container, false);
+        view =  inflater.inflate(R.layout.fragment_dashboard, container, false);
         initMembers();
-        ButterKnife.bind(this, view);
         return view;
     }
 
     private void initMembers() {
-        ListView lvPlanning = (ListView) view.findViewById(R.id.lv_planning);
-        List<PlanningItem> test = new ArrayList<PlanningItem>();
-        test.add(new PlanningItem("Activité de merde", "11:00 - 13:00", "B42 ta mere", "p25"));
-        test.add(new PlanningItem("Activité de merde", "11:00 - 13:00", "B42 ta mere", "p25"));
-        test.add(new PlanningItem("Activité de merde", "11:00 - 13:00", "B42 ta mere", "p25"));
-        test.add(new PlanningItem("Activité de merde", "11:00 - 13:00", "B42 ta mere", "p25"));
-        test.add(new PlanningItem("Activité de merde", "11:00 - 13:00", "B42 ta mere", "p25"));
-        test.add(new PlanningItem("Activité de merde", "11:00 - 13:00", "B42 ta mere", "p25"));
-        test.add(new PlanningItem("Activité de merde", "11:00 - 13:00", "B42 ta mere", "p25"));
-        test.add(new PlanningItem("Activité de merde", "11:00 - 13:00", "B42 ta mere", "p25"));
-        test.add(new PlanningItem("Activité de merde", "11:00 - 13:00", "B42 ta mere", "p25"));
-        test.add(new PlanningItem("Activité de merde", "11:00 - 13:00", "B42 ta mere", "p25"));
-        test.add(new PlanningItem("Activité de merde", "11:00 - 13:00", "B42 ta mere", "p25"));
-        test.add(new PlanningItem("Activité de merde", "11:00 - 13:00", "B42 ta mere", "p25"));
-        PlanningArrayAdapter adapter = new PlanningArrayAdapter(getContext(), R.layout.row_planning, test);
-        if (lvPlanning == null)
-            Log.v("ERROR", "list = NULL");
-        lvPlanning.setAdapter(adapter);
+        List<Notification> notifs = new ArrayList<Notification>();
+        notifs.add(new Notification("adc", "notif de merde", "26-01-2016"));
+        notifs.add(new Notification("adc", "notif de merde", "26-01-2016"));
+        notifs.add(new Notification("adc", "notif de merde", "26-01-2016"));
+        notifs.add(new Notification("adc", "notif de merde", "26-01-2016"));
+        notifs.add(new Notification("adc", "notif de merde", "26-01-2016"));
+        notifs.add(new Notification("adc", "notif de merde", "26-01-2016"));
+        notifs.add(new Notification("adc", "notif de merde", "26-01-2016"));
+
+        NotifcationArrayAdapter adapter = new NotifcationArrayAdapter(getContext(), R.layout.row_notification, notifs);
+        ListView notificationList = (ListView) view.findViewById(R.id.lv_notif);
+        notificationList.setAdapter(adapter);
     }
 
     // TODO: Rename method, update argument and hook method into UI event
@@ -136,12 +116,6 @@ public class PlanningFragment extends Fragment {
         mListener = null;
     }
 
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        ButterKnife.unbind(this);
-    }
-
     /**
      * This interface must be implemented by activities that contain this
      * fragment to allow an interaction in this fragment to be communicated
@@ -156,5 +130,4 @@ public class PlanningFragment extends Fragment {
         // TODO: Update argument type and name
         public void onFragmentInteraction(Uri uri);
     }
-
 }
