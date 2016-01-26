@@ -6,9 +6,10 @@
     <uses-permission android:name="android.permission.GET_ACCOUNTS" />
     <uses-permission android:name="android.permission.READ_PROFILE" />
     <uses-permission android:name="android.permission.READ_CONTACTS" />
-    <uses-feature android:name="android.hardware.telephony"
-        android:required="true" />
 
+    <uses-feature
+        android:name="android.hardware.telephony"
+        android:required="true" />
 
     <application
         android:allowBackup="true"
@@ -29,6 +30,8 @@
             android:name=".Activity.MainActivity"
             android:label="@string/title_activity_main"
             android:theme="@style/AppTheme.NoActionBar" >
+        </activity>
+        <activity android:name=".Activity.ProjectsActivity" >
         </activity>
     </application>
 

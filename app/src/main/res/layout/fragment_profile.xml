@@ -29,7 +29,7 @@
         android:layout_height="wrap_content"
         android:text="Jean Michel Truelle"
         android:layout_below="@+id/ll_search"
-        android:paddingLeft="@dimen/padding_tv_profile"
+        android:paddingLeft="@dimen/padding_tv"
         android:textStyle="bold"
         android:textSize="@dimen/text_size"/>
     <TextView
@@ -38,7 +38,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/ll_search"
         android:layout_toRightOf="@+id/tv_name"
-        android:paddingLeft="@dimen/padding_tv_profile"
+        android:paddingLeft="@dimen/padding_tv"
         android:text="3ieme année"
         android:textStyle="italic"/>
     <ImageView
@@ -46,7 +46,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@drawable/icon_epiandroid"
-        android:paddingLeft="@dimen/padding_tv_profile"
+        android:paddingLeft="@dimen/padding_tv"
         android:layout_below="@+id/tv_name"/>
     <TextView
         android:id="@+id/tv_login"
@@ -62,7 +62,7 @@
         android:text="@string/tv_promo"
         android:layout_below="@+id/tv_login"
         android:layout_toRightOf="@+id/iv_profile_picture"
-        android:paddingTop="@dimen/padding_tv_profile"/>
+        android:paddingTop="@dimen/padding_tv"/>
     <TextView
         android:id="@+id/tv_promo"
         android:layout_width="wrap_content"
@@ -79,7 +79,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/tv_promo"
         android:layout_toRightOf="@+id/iv_profile_picture"
-        android:paddingTop="@dimen/padding_tv_profile"/>
+        android:paddingTop="@dimen/padding_tv"/>
     <TextView
         android:id="@+id/tv_credits"
         android:layout_width="wrap_content"
@@ -96,7 +96,7 @@
         android:text="@string/tv_gpa"
         android:layout_below="@+id/tv_credits"
         android:layout_toRightOf="@+id/iv_profile_picture"
-        android:paddingTop="@dimen/padding_tv_profile"/>
+        android:paddingTop="@dimen/padding_tv"/>
     <TextView
         android:id="@+id/tv_gpa"
         android:layout_width="wrap_content"
@@ -112,7 +112,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/iv_profile_picture"
         android:text="jeanmichel.truelle@epitech.eu"
-        android:paddingLeft="@dimen/padding_tv_profile"
+        android:paddingLeft="@dimen/padding_tv"
         android:textColor="@color/colorBlue"/>
     <TextView
         android:id="@+id/tv_phone_number"
@@ -121,22 +121,22 @@
         android:layout_below="@+id/tv_mail"
         android:text="0615341436"
         android:textColor="@color/colorBlue"
-        android:paddingLeft="@dimen/padding_tv_profile"
-        android:paddingTop="@dimen/padding_tv_profile"/>
+        android:paddingLeft="@dimen/padding_tv"
+        android:paddingTop="@dimen/padding_tv"/>
     <TextView
         android:id="@+id/tv_netsoul_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/tv_phone_number"
         android:paddingTop="@dimen/netsoul_title_padding_top"
-        android:paddingLeft="@dimen/padding_tv_profile"
+        android:paddingLeft="@dimen/padding_tv"
         android:text="@string/tv_netsoul"/>
     <TextView
         android:id="@+id/tv_netsoul"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/tv_netsoul_title"
-        android:paddingLeft="@dimen/padding_tv_profile"
+        android:paddingLeft="@dimen/padding_tv"
         android:text="no logs"/>
 
 </RelativeLayout>

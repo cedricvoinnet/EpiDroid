@@ -1,4 +1,4 @@
-package com.example.jordan.epiandroid.Utils;
+package com.example.jordan.epiandroid.Fragment.PlanningFragment;
 
 import android.content.Context;
 import android.util.Log;
@@ -20,11 +20,11 @@ import java.util.List;
 /**
  * Created by jordan on 25/01/2016.
  */
-public class MyArrayAdapter extends ArrayAdapter<PlanningItem>{
+public class PlanningArrayAdapter extends ArrayAdapter<PlanningItem>{
     private static LayoutInflater mInflater = null;
     private static List<PlanningItem> objs;
 
-    public MyArrayAdapter(Context context, int layout, List<PlanningItem> objects) {
+    public PlanningArrayAdapter(Context context, int layout, List<PlanningItem> objects) {
         super(context, layout, objects);
         objs = objects;
         mInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);

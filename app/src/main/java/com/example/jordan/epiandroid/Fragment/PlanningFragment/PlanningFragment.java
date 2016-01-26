@@ -14,7 +14,6 @@ import android.widget.TextView;
 
 import com.example.jordan.epiandroid.Model.PlanningItem;
 import com.example.jordan.epiandroid.R;
-import com.example.jordan.epiandroid.Utils.MyArrayAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -107,7 +106,7 @@ public class PlanningFragment extends Fragment {
         test.add(new PlanningItem("Activité de merde", "11:00 - 13:00", "B42 ta mere", "p25"));
         test.add(new PlanningItem("Activité de merde", "11:00 - 13:00", "B42 ta mere", "p25"));
         test.add(new PlanningItem("Activité de merde", "11:00 - 13:00", "B42 ta mere", "p25"));
-        MyArrayAdapter adapter = new MyArrayAdapter(getContext(), R.layout.row_planning, test);
+        PlanningArrayAdapter adapter = new PlanningArrayAdapter(getContext(), R.layout.row_planning, test);
         if (lvPlanning == null)
             Log.v("ERROR", "list = NULL");
         lvPlanning.setAdapter(adapter);

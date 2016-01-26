@@ -7,8 +7,14 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ListView;
 
+import com.example.jordan.epiandroid.Model.ModuleItem;
+import com.example.jordan.epiandroid.Model.Project;
 import com.example.jordan.epiandroid.R;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -30,6 +36,7 @@ public class ModuleFragment extends Fragment {
 
     private OnFragmentInteractionListener mListener;
 
+    private View view;
     /**
      * Use this factory method to create a new instance of
      * this fragment using the provided parameters.
@@ -61,11 +68,33 @@ public class ModuleFragment extends Fragment {
         }
     }
 
+    private void initMembers() {
+        List<Project> projects = new ArrayList<Project>();
+        projects.add(new Project("projet 1", "ggwp", "12"));
+        projects.add(new Project("projet 2", "gggwpgwpgwpgwpwp", "12"));
+        projects.add(new Project("projet 3", "ggwgwpgwpgwpgwpgwpgwpgwpgwpgwpgwpp", "12"));
+        projects.add(new Project("projet 4", "gggwpgwpgwpgwpgwpgwpgwpgwpgwpwp", "12"));
+        projects.add(new Project("projet 5", "gggwpgwpgwpgwpwp", "12"));
+        projects.add(new Project("projet 6", "gggwpgwpgwpgwpgwpgwpgwpgwpgwpgwpgwpgwpgwpgwpgwpgwpgwpgwpgwpgwpgwpgwpgwpgwpwp", "12"));
+        projects.add(new Project("projet 7", "gggwpgwpgwpgwpgwpgwpgwpgwpgwpgwpgwpgwpgwpgwpgwpgwpgwpgwpgwpgwpgwpgwpgwpgwpgwpgwpgwpgwpgwpgwpvvwp", "12"));
+
+        List<ModuleItem> modules= new ArrayList<ModuleItem>();
+        ModuleItem mi = new ModuleItem("B1 TAMER", projects);
+        modules.add(mi);
+        modules.add(mi);
+
+        ModuleArrayAdapter adapter = new ModuleArrayAdapter(getContext(), R.layout.fragment_module, modules);
+        ListView lvModule = (ListView) view.findViewById(R.id.lv_module);
+        lvModule.setAdapter(adapter);
+    }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_module, container, false);
+        view = inflater.inflate(R.layout.fragment_module, container, false);
+        initMembers();
+        return view;
     }
 
     // TODO: Rename method, update argument and hook method into UI event
