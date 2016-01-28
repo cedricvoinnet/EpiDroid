@@ -7,6 +7,7 @@
         android:id="@+id/iv_profile"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
         android:src="@drawable/icon_epiandroid"/>
     <TextView
         android:id="@+id/tv_log_time_title"

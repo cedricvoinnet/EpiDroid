@@ -1,20 +1,36 @@
 package com.example.jordan.epiandroid.Fragment;
 
 import android.app.Activity;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.TextView;
 
+import com.example.jordan.epiandroid.APIIntra.APIRequest;
+import com.example.jordan.epiandroid.Activity.LoginActivity;
 import com.example.jordan.epiandroid.Adapter.NotifcationArrayAdapter;
-import com.example.jordan.epiandroid.Model.Notification;
+import com.example.jordan.epiandroid.Model.Current;
+import com.example.jordan.epiandroid.Model.DashInfos;
+import com.example.jordan.epiandroid.Model.History;
 import com.example.jordan.epiandroid.R;
 
-import java.util.ArrayList;
+import java.io.InputStream;
 import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.GsonConverterFactory;
+import retrofit2.Response;
+import retrofit2.Retrofit;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -25,15 +41,10 @@ import java.util.List;
  * create an instance of this fragment.
  */
 public class DashboardFragment extends Fragment {
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
     private View view;
-
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
+    private ListView notificationList;
+    private TextView logTime;
+    private ImageView userPicture;
 
     private OnFragmentInteractionListener mListener;
 
@@ -41,17 +52,10 @@ public class DashboardFragment extends Fragment {
      * Use this factory method to create a new instance of
      * this fragment using the provided parameters.
      *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
      * @return A new instance of fragment DashBoardFragment.
      */
-    // TODO: Rename and change types and number of parameters
-    public static DashboardFragment newInstance(String param1, String param2) {
+    public static DashboardFragment newInstance() {
         DashboardFragment fragment = new DashboardFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
         return fragment;
     }
 
@@ -62,34 +66,63 @@ public class DashboardFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        view =  inflater.inflate(R.layout.fragment_dashboard, container, false);
+        view = inflater.inflate(R.layout.fragment_dashboard, container, false);
+        notificationList = (ListView) view.findViewById(R.id.lv_notif);
+        logTime = (TextView) view.findViewById(R.id.tv_log_time);
+        userPicture = (ImageView) view.findViewById(R.id.iv_profile);
+
+        //ACTIVER PROGRESSBAR
         initMembers();
         return view;
     }
 
     private void initMembers() {
-        List<Notification> notifs = new ArrayList<Notification>();
-        notifs.add(new Notification("adc", "notif de merde", "26-01-2016"));
-        notifs.add(new Notification("adc", "notif de merde", "26-01-2016"));
-        notifs.add(new Notification("adc", "notif de merde", "26-01-2016"));
-        notifs.add(new Notification("adc", "notif de merde", "26-01-2016"));
-        notifs.add(new Notification("adc", "notif de merde", "26-01-2016"));
-        notifs.add(new Notification("adc", "notif de merde", "26-01-2016"));
-        notifs.add(new Notification("adc", "notif de merde", "26-01-2016"));
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(LoginActivity.API_URL)
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
 
-        NotifcationArrayAdapter adapter = new NotifcationArrayAdapter(getContext(), R.layout.row_notification, notifs);
-        ListView notificationList = (ListView) view.findViewById(R.id.lv_notif);
+        APIRequest request = retrofit.create(APIRequest.class);
+        Call<DashInfos> call = request.getInfos(LoginActivity.sessionToken);
+        call.enqueue(new Callback<DashInfos>() {
+            @Override
+            public void onResponse(Response<DashInfos> response) {
+                Log.d("DashBoard", "Success");
+                if (response.code() == 200) {
+                    new DownloadImageTask(userPicture).execute(LoginActivity.PICTURES_URL + LoginActivity.login + ".bmp");
+
+                    DashInfos infos = response.body();
+
+                    setNotif(infos.getHistory());
+                    setLogTime(infos.getCurrent().get(0));
+                }
+            }
+
+            @Override
+            public void onFailure(Throwable t) {
+                //DESACTIVER PROGRESSBAR
+                Log.d("DashBoard", "Fail");
+            }
+        });
+    }
+
+    public void setNotif(List<History> notifs) {
+        NotifcationArrayAdapter adapter;
+
+        notificationList = (ListView) view.findViewById(R.id.lv_notif);
+        adapter = new NotifcationArrayAdapter(getContext(), R.layout.row_notification, notifs);
         notificationList.setAdapter(adapter);
+    }
+
+
+    public void setLogTime(Current current) {
+        logTime.setText(current.getActiveLog());
     }
 
     // TODO: Rename method, update argument and hook method into UI event
@@ -128,6 +161,33 @@ public class DashboardFragment extends Fragment {
      */
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
-        public void onFragmentInteraction(Uri uri);
+        void onFragmentInteraction(Uri uri);
+    }
+
+    private class DownloadImageTask extends AsyncTask<String, Void, Bitmap> {
+        ImageView bmImage;
+
+        public DownloadImageTask(ImageView bmImage) {
+            this.bmImage = bmImage;
+        }
+
+        protected Bitmap doInBackground(String... urls) {
+            String urldisplay = urls[0];
+            Bitmap mIcon11 = null;
+            try {
+                InputStream in = new java.net.URL(urldisplay).openStream();
+                mIcon11 = BitmapFactory.decodeStream(in);
+            } catch (Exception e) {
+                Log.e("Error", e.getMessage());
+                e.printStackTrace();
+            }
+            return mIcon11;
+        }
+
+        protected void onPostExecute(Bitmap result) {
+            if (result != null)
+                bmImage.setImageBitmap(result);
+            //DESACTIVER LA PROGRESSBAR
+        }
     }
 }
