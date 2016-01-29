@@ -10,8 +10,8 @@ import android.view.ViewGroup;
 import android.widget.ListView;
 
 import com.example.jordan.epiandroid.Adapter.ModuleArrayAdapter;
-import com.example.jordan.epiandroid.Model.ModuleItem;
-import com.example.jordan.epiandroid.Model.Project;
+import com.example.jordan.epiandroid.Models.ModuleItem;
+import com.example.jordan.epiandroid.Models.Project;
 import com.example.jordan.epiandroid.R;
 
 import java.util.ArrayList;

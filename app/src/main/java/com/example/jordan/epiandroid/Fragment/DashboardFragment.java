@@ -16,9 +16,9 @@ import android.widget.Toast;
 import com.example.jordan.epiandroid.APIIntra.APIRequest;
 import com.example.jordan.epiandroid.Activity.LoginActivity;
 import com.example.jordan.epiandroid.Adapter.NotifcationArrayAdapter;
-import com.example.jordan.epiandroid.Model.DashBoard.Current;
-import com.example.jordan.epiandroid.Model.DashBoard.DashInfos;
-import com.example.jordan.epiandroid.Model.DashBoard.History;
+import com.example.jordan.epiandroid.Models.DashBoard.Current;
+import com.example.jordan.epiandroid.Models.DashBoard.DashInfos;
+import com.example.jordan.epiandroid.Models.DashBoard.History;
 import com.example.jordan.epiandroid.R;
 import com.squareup.picasso.Picasso;
 

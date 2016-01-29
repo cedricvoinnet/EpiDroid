@@ -10,7 +10,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.example.jordan.epiandroid.Activity.ProjectsActivity;
-import com.example.jordan.epiandroid.Model.ModuleItem;
+import com.example.jordan.epiandroid.Models.ModuleItem;
 import com.example.jordan.epiandroid.R;
 
 import java.util.List;

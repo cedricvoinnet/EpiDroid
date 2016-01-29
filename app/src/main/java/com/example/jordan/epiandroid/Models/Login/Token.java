@@ -1,4 +1,4 @@
-package com.example.jordan.epiandroid.Model;
+package com.example.jordan.epiandroid.Models.Login;
 
 public class Token {
     private String token;

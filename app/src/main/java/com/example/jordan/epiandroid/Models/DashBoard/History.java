@@ -1,4 +1,4 @@
-package com.example.jordan.epiandroid.Model.DashBoard;
+package com.example.jordan.epiandroid.Models.DashBoard;
 
 /**
  * Created by Cedric on 28/01/2016.

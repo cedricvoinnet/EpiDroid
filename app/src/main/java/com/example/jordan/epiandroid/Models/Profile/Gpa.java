@@ -1,4 +1,4 @@
-package com.example.jordan.epiandroid.Model.Profile;
+package com.example.jordan.epiandroid.Models.Profile;
 
 /**
  * Created by Cedric on 29/01/2016.

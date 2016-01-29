@@ -1,4 +1,4 @@
-package com.example.jordan.epiandroid.Model;
+package com.example.jordan.epiandroid.Models;
 
 import android.os.Parcel;
 import android.os.Parcelable;

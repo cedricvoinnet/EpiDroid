@@ -15,7 +15,7 @@ import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.example.jordan.epiandroid.APIIntra.APIRequest;
-import com.example.jordan.epiandroid.Model.Token;
+import com.example.jordan.epiandroid.Models.Login.Token;
 import com.example.jordan.epiandroid.R;
 
 import retrofit2.Call;

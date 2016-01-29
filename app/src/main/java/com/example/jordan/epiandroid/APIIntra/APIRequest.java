@@ -1,9 +1,9 @@
 package com.example.jordan.epiandroid.APIIntra;
 
 
-import com.example.jordan.epiandroid.Model.DashBoard.DashInfos;
-import com.example.jordan.epiandroid.Model.Profile.UserProfile;
-import com.example.jordan.epiandroid.Model.Token;
+import com.example.jordan.epiandroid.Models.DashBoard.DashInfos;
+import com.example.jordan.epiandroid.Models.Login.Token;
+import com.example.jordan.epiandroid.Models.Profile.UserProfile;
 
 import retrofit2.Call;
 import retrofit2.http.GET;

@@ -12,7 +12,7 @@ import android.widget.ArrayAdapter;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.example.jordan.epiandroid.Model.Project;
+import com.example.jordan.epiandroid.Models.Project;
 import com.example.jordan.epiandroid.R;
 
 import java.util.List;

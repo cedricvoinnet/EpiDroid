@@ -8,7 +8,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.jordan.epiandroid.Model.DashBoard.History;
+import com.example.jordan.epiandroid.Models.DashBoard.History;
 import com.example.jordan.epiandroid.R;
 
 import java.util.List;

@@ -21,7 +21,7 @@ import android.widget.Toast;
 
 import com.example.jordan.epiandroid.APIIntra.APIRequest;
 import com.example.jordan.epiandroid.Activity.LoginActivity;
-import com.example.jordan.epiandroid.Model.Profile.UserProfile;
+import com.example.jordan.epiandroid.Models.Profile.UserProfile;
 import com.example.jordan.epiandroid.R;
 import com.squareup.picasso.Picasso;
 

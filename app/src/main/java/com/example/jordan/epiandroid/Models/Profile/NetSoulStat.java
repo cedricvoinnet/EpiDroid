@@ -1,4 +1,4 @@
-package com.example.jordan.epiandroid.Model.Profile;
+package com.example.jordan.epiandroid.Models.Profile;
 
 public class NetSoulStat {
     private String active;

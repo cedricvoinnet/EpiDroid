@@ -13,7 +13,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.example.jordan.epiandroid.Adapter.PlanningArrayAdapter;
-import com.example.jordan.epiandroid.Model.PlanningItem;
+import com.example.jordan.epiandroid.Models.PlanningItem;
 import com.example.jordan.epiandroid.R;
 
 import java.util.ArrayList;
