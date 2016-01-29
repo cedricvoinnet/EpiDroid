@@ -8,10 +8,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
-import android.widget.ShareActionProvider;
 import android.widget.Toast;
 
 import com.example.jordan.epiandroid.APIIntra.APIRequest;
@@ -26,7 +26,7 @@ import retrofit2.Retrofit;
 public class LoginActivity extends AppCompatActivity {
 
     public static String API_URL = "http://epitech-api.herokuapp.com";
-    public static String PICTURES_URL = "https://cdn.local.epitech.eu/userprofil/";
+    public static String PICTURES_URL = "https://cdn.local.epitech.eu/userprofil/profilview/";
     public static String sessionToken = null;
     public static String login = null;
 
@@ -66,7 +66,7 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     @Override
-    protected void onResume(){
+    protected void onResume() {
         super.onResume();
     }
 
@@ -75,6 +75,12 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void attemptLogin() {
+        View view = this.getCurrentFocus();
+
+        if (view != null) {
+            InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+            imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+        }
         mLoginView.setError(null);
         mPasswordView.setError(null);
 

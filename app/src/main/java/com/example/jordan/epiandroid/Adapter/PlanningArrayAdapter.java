@@ -16,7 +16,7 @@ import java.util.List;
 /**
  * Created by jordan on 25/01/2016.
  */
-public class PlanningArrayAdapter extends ArrayAdapter<PlanningItem>{
+public class PlanningArrayAdapter extends ArrayAdapter<PlanningItem> {
     private static LayoutInflater mInflater = null;
     private static List<PlanningItem> objs;
 
@@ -39,15 +39,14 @@ public class PlanningArrayAdapter extends ArrayAdapter<PlanningItem>{
         final ViewHolder holder;
         final PlanningItem current = objs.get(position);
         if (convertView == null) {
-            holder                      = new ViewHolder();
-            convertView                 = mInflater.inflate(R.layout.row_planning, parent, false);
+            holder = new ViewHolder();
+            convertView = mInflater.inflate(R.layout.row_planning, parent, false);
             holder.tvName = (TextView) convertView.findViewById(R.id.tv_name);
             holder.tvHour = (TextView) convertView.findViewById(R.id.tv_hour);
             holder.tvModule = (TextView) convertView.findViewById(R.id.tv_module);
             holder.tvClassroom = (TextView) convertView.findViewById(R.id.tv_classroom);
             convertView.setTag(holder);
-        }
-        else {
+        } else {
             holder = (ViewHolder) convertView.getTag();
         }
 

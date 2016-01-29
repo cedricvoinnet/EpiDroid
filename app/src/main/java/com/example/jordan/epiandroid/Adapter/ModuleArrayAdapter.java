@@ -40,8 +40,8 @@ public class ModuleArrayAdapter extends ArrayAdapter<ModuleItem> {
         final ViewHolder holder;
         final ModuleItem current = objs.get(position);
         if (convertView == null) {
-            holder                      = new ViewHolder();
-            convertView                 = mInflater.inflate(R.layout.row_module, parent, false);
+            holder = new ViewHolder();
+            convertView = mInflater.inflate(R.layout.row_module, parent, false);
             holder.tvName = (TextView) convertView.findViewById(R.id.tv_module_name);
             holder.tvName.setText(current.getName());
             holder.tvName.setOnClickListener(new View.OnClickListener() {
@@ -53,8 +53,7 @@ public class ModuleArrayAdapter extends ArrayAdapter<ModuleItem> {
                 }
             });
             convertView.setTag(holder);
-        }
-        else {
+        } else {
             holder = (ViewHolder) convertView.getTag();
         }
 

@@ -2,6 +2,7 @@ package com.example.jordan.epiandroid.Fragment;
 
 import android.app.Activity;
 import android.content.ActivityNotFoundException;
+import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -10,17 +11,28 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.example.jordan.epiandroid.APIIntra.APIRequest;
+import com.example.jordan.epiandroid.Activity.LoginActivity;
+import com.example.jordan.epiandroid.Model.Profile.UserProfile;
 import com.example.jordan.epiandroid.R;
+import com.squareup.picasso.Picasso;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.GsonConverterFactory;
+import retrofit2.Response;
+import retrofit2.Retrofit;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -70,10 +82,6 @@ public class ProfileFragment extends Fragment {
     @Bind(R.id.tv_phone_number)
     TextView tvPhoneNumber;
 
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
-
     private OnFragmentInteractionListener mListener;
 
     @OnClick(R.id.tv_mail)
@@ -106,24 +114,26 @@ public class ProfileFragment extends Fragment {
 
     @OnClick(R.id.b_search)
     public void search() {
-        // TODO : requete API sur et_search_login.getText(), modifier tout les champs avec les nouvelles info :)
+        View view = getActivity().getCurrentFocus();
+
+        if (view != null) {
+            InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+            imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+        }
+        String userToSearch = etSearchLogin.getText().toString();
+        if (!userToSearch.isEmpty())
+            refresh(userToSearch);
     }
 
     /**
      * Use this factory method to create a new instance of
      * this fragment using the provided parameters.
      *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
      * @return A new instance of fragment ProfileFragment.
      */
     // TODO: Rename and change types and number of parameters
     public static ProfileFragment newInstance(String param1, String param2) {
         ProfileFragment fragment = new ProfileFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
         return fragment;
     }
 
@@ -134,10 +144,6 @@ public class ProfileFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
     }
 
     @Override
@@ -145,6 +151,9 @@ public class ProfileFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_profile, container, false);
+
+        refresh(LoginActivity.login);
+
         ButterKnife.bind(this, view);
         return view;
     }
@@ -194,4 +203,44 @@ public class ProfileFragment extends Fragment {
         public void onFragmentInteraction(Uri uri);
     }
 
+    public void refresh(String user) {
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(LoginActivity.API_URL)
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+        APIRequest request = retrofit.create(APIRequest.class);
+        Call<UserProfile> call = request.getUser(LoginActivity.sessionToken, user);
+        call.enqueue(new Callback<UserProfile>() {
+            @Override
+            public void onResponse(Response<UserProfile> response) {
+                Log.d("User", "Success");
+                if (response.code() == 200) {
+                    UserProfile user = response.body();
+
+                    if (!user.hasError()) {
+                        Picasso.with(getContext())
+                                .load(user.getPicture())
+                                .placeholder(R.drawable.progress_animation)
+                                .into(ivProfilePicture);
+
+                        tvName.setText(user.getFullName());
+                        tvYear.setText(user.getStudentYear());
+                        tvLogin.setText(user.getLogin());
+                        tvPromo.setText(user.getPromo());
+                        tvCredits.setText(user.getCredits());
+                        tvGpa.setText(user.getGpa().get(0).getGpa());
+                        tvMail.setText(user.getEmail());
+                        tvNetsoul.setText(user.getNetStat().getActive());
+                    } else
+                        Toast.makeText(getContext(), user.getError(), Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Throwable t) {
+                Log.d("User", "Fail: " + t.getMessage());
+                Toast.makeText(getContext(), R.string.network_error, Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
 }

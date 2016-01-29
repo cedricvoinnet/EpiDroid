@@ -1,4 +1,4 @@
-package com.example.jordan.epiandroid.Model;
+package com.example.jordan.epiandroid.Model.DashBoard;
 
 /**
  * Created by Cedric on 28/01/2016.
@@ -9,36 +9,28 @@ public class User {
     private String title;
 
     /**
-     *
-     * @return
-     * The picture
+     * @return The picture
      */
     public String getPicture() {
         return picture;
     }
 
     /**
-     *
-     * @param picture
-     * The picture
+     * @param picture The picture
      */
     public void setPicture(String picture) {
         this.picture = picture;
     }
 
     /**
-     *
-     * @return
-     * The title
+     * @return The title
      */
     public String getTitle() {
         return title;
     }
 
     /**
-     *
-     * @param title
-     * The title
+     * @param title The title
      */
     public void setTitle(String title) {
         this.title = title;

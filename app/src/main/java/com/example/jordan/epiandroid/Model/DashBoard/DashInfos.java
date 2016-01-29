@@ -1,4 +1,4 @@
-package com.example.jordan.epiandroid.Model;
+package com.example.jordan.epiandroid.Model.DashBoard;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -8,55 +8,44 @@ public class DashInfos {
     private String ip;
     private List<History> history = new ArrayList<>();
     private List<Current> current = new ArrayList<>();
+
     /**
-     *
-     * @return
-     * The ip
+     * @return The ip
      */
     public String getIp() {
         return ip;
     }
 
     /**
-     *
-     * @param ip
-     * The ip
+     * @param ip The ip
      */
     public void setIp(String ip) {
         this.ip = ip;
     }
 
     /**
-     *
-     * @return
-     * The history
+     * @return The history
      */
     public List<History> getHistory() {
         return history;
     }
 
     /**
-     *
-     * @param history
-     * The history
+     * @param history The history
      */
     public void setHistory(List<History> history) {
         this.history = history;
     }
 
     /**
-     *
-     * @return
-     * The current
+     * @return The current
      */
     public List<Current> getCurrent() {
         return current;
     }
 
     /**
-     *
-     * @param current
-     * The current
+     * @param current The current
      */
     public void setCurrent(List<Current> current) {
         this.current = current;

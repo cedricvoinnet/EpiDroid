@@ -1,19 +1,14 @@
 package com.example.jordan.epiandroid.Adapter;
 
 import android.content.Context;
-import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.example.jordan.epiandroid.Activity.ProjectsActivity;
-import com.example.jordan.epiandroid.Model.History;
-import com.example.jordan.epiandroid.Model.ModuleItem;
-import com.example.jordan.epiandroid.Model.Notification;
+import com.example.jordan.epiandroid.Model.DashBoard.History;
 import com.example.jordan.epiandroid.R;
 
 import java.util.List;
@@ -44,16 +39,15 @@ public class NotifcationArrayAdapter extends ArrayAdapter<History> {
         final ViewHolder holder;
         final History current = objs.get(position);
         if (convertView == null) {
-            holder                      = new ViewHolder();
-            convertView                 = mInflater.inflate(R.layout.row_notification, parent, false);
+            holder = new ViewHolder();
+            convertView = mInflater.inflate(R.layout.row_notification, parent, false);
             holder.tvContent = (TextView) convertView.findViewById(R.id.tv_content);
             holder.tvContent.setText(android.text.Html.fromHtml(current.getTitle()));
             holder.tvDate = (TextView) convertView.findViewById(R.id.tv_date);
             holder.tvDate.setText(current.getDate());
 
             convertView.setTag(holder);
-        }
-        else {
+        } else {
             holder = (ViewHolder) convertView.getTag();
         }
 

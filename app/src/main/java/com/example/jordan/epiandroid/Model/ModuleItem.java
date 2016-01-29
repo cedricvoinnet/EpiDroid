@@ -13,7 +13,7 @@ public class ModuleItem implements Parcelable {
     private String name;
     List<Project> projects;
 
-    public ModuleItem (String name, List<Project> projects) {
+    public ModuleItem(String name, List<Project> projects) {
         this.name = name;
         this.projects = projects;
     }

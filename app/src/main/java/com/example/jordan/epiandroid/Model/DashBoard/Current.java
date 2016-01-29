@@ -1,4 +1,4 @@
-package com.example.jordan.epiandroid.Model;
+package com.example.jordan.epiandroid.Model.DashBoard;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
