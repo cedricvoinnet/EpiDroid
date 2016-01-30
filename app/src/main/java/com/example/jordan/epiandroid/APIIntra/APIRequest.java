@@ -3,7 +3,10 @@ package com.example.jordan.epiandroid.APIIntra;
 
 import com.example.jordan.epiandroid.Models.DashBoard.DashInfos;
 import com.example.jordan.epiandroid.Models.Login.Token;
+import com.example.jordan.epiandroid.Models.Planning.Activity;
 import com.example.jordan.epiandroid.Models.Profile.UserProfile;
+
+import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.http.GET;
@@ -19,4 +22,7 @@ public interface APIRequest {
 
     @GET("/user")
     Call<UserProfile> getUser(@Query("token") String token, @Query("user") String user);
+
+    @GET("/planning")
+    Call<List<Activity>> getPlannng(@Query("token") String token, @Query("start") String start, @Query("end") String end);
 }

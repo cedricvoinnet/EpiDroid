@@ -11,16 +11,26 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.example.jordan.epiandroid.APIIntra.APIRequest;
+import com.example.jordan.epiandroid.Activity.LoginActivity;
 import com.example.jordan.epiandroid.Adapter.PlanningArrayAdapter;
-import com.example.jordan.epiandroid.Models.PlanningItem;
 import com.example.jordan.epiandroid.R;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
+import java.util.Locale;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.GsonConverterFactory;
+import retrofit2.Response;
+import retrofit2.Retrofit;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -31,10 +41,7 @@ import butterknife.ButterKnife;
  * create an instance of this fragment.
  */
 public class PlanningFragment extends Fragment {
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
+
     @Bind(R.id.btn_prev_day)
     Button btnPrevDay;
     @Bind(R.id.date)
@@ -45,9 +52,7 @@ public class PlanningFragment extends Fragment {
     ListView lvPlanning;
     private View view;
 
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
+    private SimpleDateFormat APIDateFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.FRANCE);
 
     private OnFragmentInteractionListener mListener;
 
@@ -55,18 +60,11 @@ public class PlanningFragment extends Fragment {
      * Use this factory method to create a new instance of
      * this fragment using the provided parameters.
      *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
      * @return A new instance of fragment PlanningFragment.
      */
     // TODO: Rename and change types and number of parameters
     public static PlanningFragment newInstance(String param1, String param2) {
-        PlanningFragment fragment = new PlanningFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
+        return new PlanningFragment();
     }
 
     public PlanningFragment() {
@@ -76,10 +74,6 @@ public class PlanningFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
     }
 
     @Override
@@ -87,6 +81,11 @@ public class PlanningFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         view = inflater.inflate(R.layout.fragment_planning, container, false);
+        date = (TextView) view.findViewById(R.id.date);
+
+        Calendar c = Calendar.getInstance();
+        date.setText(APIDateFormat.format(c.getTime()));
+
         initMembers();
         ButterKnife.bind(this, view);
         return view;
@@ -94,23 +93,43 @@ public class PlanningFragment extends Fragment {
 
     private void initMembers() {
         ListView lvPlanning = (ListView) view.findViewById(R.id.lv_planning);
-        List<PlanningItem> test = new ArrayList<PlanningItem>();
-        test.add(new PlanningItem("Activité de merde", "11:00 - 13:00", "B42 ta mere", "p25"));
-        test.add(new PlanningItem("Activité de merde", "11:00 - 13:00", "B42 ta mere", "p25"));
-        test.add(new PlanningItem("Activité de merde", "11:00 - 13:00", "B42 ta mere", "p25"));
-        test.add(new PlanningItem("Activité de merde", "11:00 - 13:00", "B42 ta mere", "p25"));
-        test.add(new PlanningItem("Activité de merde", "11:00 - 13:00", "B42 ta mere", "p25"));
-        test.add(new PlanningItem("Activité de merde", "11:00 - 13:00", "B42 ta mere", "p25"));
-        test.add(new PlanningItem("Activité de merde", "11:00 - 13:00", "B42 ta mere", "p25"));
-        test.add(new PlanningItem("Activité de merde", "11:00 - 13:00", "B42 ta mere", "p25"));
-        test.add(new PlanningItem("Activité de merde", "11:00 - 13:00", "B42 ta mere", "p25"));
-        test.add(new PlanningItem("Activité de merde", "11:00 - 13:00", "B42 ta mere", "p25"));
-        test.add(new PlanningItem("Activité de merde", "11:00 - 13:00", "B42 ta mere", "p25"));
-        test.add(new PlanningItem("Activité de merde", "11:00 - 13:00", "B42 ta mere", "p25"));
-        PlanningArrayAdapter adapter = new PlanningArrayAdapter(getContext(), R.layout.row_planning, test);
-        if (lvPlanning == null)
-            Log.v("ERROR", "list = NULL");
-        lvPlanning.setAdapter(adapter);
+
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(LoginActivity.API_URL)
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+
+        APIRequest request = retrofit.create(APIRequest.class);
+
+        Call<List<com.example.jordan.epiandroid.Models.Planning.Activity>> call = request.getPlannng(LoginActivity.sessionToken, date.getText().toString(), date.getText().toString());
+        call.enqueue(new Callback<List<com.example.jordan.epiandroid.Models.Planning.Activity>>() {
+            @Override
+            public void onResponse(Response<List<com.example.jordan.epiandroid.Models.Planning.Activity>> response) {
+                Log.d("Planning", "Success");
+                if (response.code() == 200) {
+                    List<com.example.jordan.epiandroid.Models.Planning.Activity> tmp = response.body();
+                    List<com.example.jordan.epiandroid.Models.Planning.Activity> Activities = new ArrayList<>();
+                    for (com.example.jordan.epiandroid.Models.Planning.Activity act : tmp) {
+                        if (act.getModuleRegistered())
+                            Activities.add(act);
+                    }
+                    setPlanningList(Activities);
+                }
+            }
+
+            @Override
+            public void onFailure(Throwable t) {
+                Toast.makeText(getContext(), R.string.network_error, Toast.LENGTH_SHORT).show();
+                Log.d("Planning", "Can't access to network");
+            }
+        });
+    }
+
+    private void setPlanningList(List<com.example.jordan.epiandroid.Models.Planning.Activity> Activities){
+        final PlanningArrayAdapter adapter = new PlanningArrayAdapter(getContext(), R.layout.row_planning, Activities);
+        if (lvPlanning != null) {
+            lvPlanning.setAdapter(adapter);
+        }
     }
 
     // TODO: Rename method, update argument and hook method into UI event

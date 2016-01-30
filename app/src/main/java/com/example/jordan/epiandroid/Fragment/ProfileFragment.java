@@ -232,7 +232,7 @@ public class ProfileFragment extends Fragment {
                         tvCredits.setText(user.getCredits());
                         tvGpa.setText(user.getGpa().get(0).getGpa());
                         tvMail.setText(user.getEmail());
-                        tvNetsoul.setText(user.getNetStat().getActive());
+                        tvNetsoul.setText(user.getNetStat() != null ? user.getNetStat().getActive(): "N/A");
                     } else
                         Toast.makeText(getContext(), user.getError(), Toast.LENGTH_SHORT).show();
                 }

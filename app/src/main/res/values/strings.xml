@@ -35,4 +35,5 @@
 
     <!--DashBoardFragment-->
     <string name="log_time_title">Log time :</string>
+    <string name="btn_next_day"><![CDATA[>>]]></string>
 </resources>

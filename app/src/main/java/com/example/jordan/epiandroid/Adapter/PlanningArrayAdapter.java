@@ -8,19 +8,17 @@ import android.widget.ArrayAdapter;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.example.jordan.epiandroid.Models.Planning.Activity;
 import com.example.jordan.epiandroid.Models.PlanningItem;
 import com.example.jordan.epiandroid.R;
 
 import java.util.List;
 
-/**
- * Created by jordan on 25/01/2016.
- */
-public class PlanningArrayAdapter extends ArrayAdapter<PlanningItem> {
+public class PlanningArrayAdapter extends ArrayAdapter<Activity> {
     private static LayoutInflater mInflater = null;
-    private static List<PlanningItem> objs;
+    private static List<Activity> objs;
 
-    public PlanningArrayAdapter(Context context, int layout, List<PlanningItem> objects) {
+    public PlanningArrayAdapter(Context context, int layout, List<Activity> objects) {
         super(context, layout, objects);
         objs = objects;
         mInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -37,14 +35,23 @@ public class PlanningArrayAdapter extends ArrayAdapter<PlanningItem> {
     @Override
     public View getView(final int position, View convertView, ViewGroup parent) {
         final ViewHolder holder;
-        final PlanningItem current = objs.get(position);
+        final Activity current = objs.get(position);
         if (convertView == null) {
             holder = new ViewHolder();
             convertView = mInflater.inflate(R.layout.row_planning, parent, false);
+
             holder.tvName = (TextView) convertView.findViewById(R.id.tv_name);
+            holder.tvName.setText(current.getActiTitle());
+
             holder.tvHour = (TextView) convertView.findViewById(R.id.tv_hour);
+            holder.tvHour.setText(current.getStart());
+
             holder.tvModule = (TextView) convertView.findViewById(R.id.tv_module);
+            holder.tvModule.setText(current.getTitlemodule());
+
             holder.tvClassroom = (TextView) convertView.findViewById(R.id.tv_classroom);
+            holder.tvClassroom.setText(current.getRoom() != null ? current.getRoom().getCode() : "N/A");
+
             convertView.setTag(holder);
         } else {
             holder = (ViewHolder) convertView.getTag();

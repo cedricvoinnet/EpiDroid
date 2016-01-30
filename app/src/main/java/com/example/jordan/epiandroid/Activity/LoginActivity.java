@@ -122,7 +122,7 @@ public class LoginActivity extends AppCompatActivity {
 
                 @Override
                 public void onResponse(retrofit2.Response<Token> response) {
-                    mProgressBar.setVisibility(View.INVISIBLE);
+                    mProgressBar.setVisibility(View.GONE);
                     if (response.code() == 200) {
                         Token t = response.body();
                         Log.d("Token", "Token: " + t.getToken());
@@ -141,7 +141,7 @@ public class LoginActivity extends AppCompatActivity {
 
                 @Override
                 public void onFailure(Throwable throwable) {
-                    mProgressBar.setVisibility(View.INVISIBLE);
+                    mProgressBar.setVisibility(View.GONE);
                     Toast.makeText(context, R.string.network_error, Toast.LENGTH_SHORT).show();
                     Log.d("Token", "Can't access to network");
                 }

@@ -15,7 +15,6 @@
         android:id="@+id/date"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="2016-01-25"
         android:textSize="@dimen/big_field_textsize"
         android:gravity="center"
         android:layout_above="@+id/lv_planning"
@@ -27,7 +26,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@color/colorOrange"
-        android:text=">>"
+        android:text="@string/btn_next_day"
         android:layout_alignParentTop="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true" />

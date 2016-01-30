@@ -8,7 +8,6 @@
         android:id="@+id/tv_hour"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="11:00 - 13:00"
         android:textSize="@dimen/big_field_textsize"
         android:textColor="@color/colorBlue"
         android:textStyle="bold" />
@@ -18,7 +17,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/tv_hour"
-        android:text="Conférence de mon Q"
         android:textSize="@dimen/big_field_textsize" />
 
     <TextView
@@ -26,15 +24,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/tv_name"
-        android:textSize="@dimen/little_field_textsize"
-        android:text="module" />
+        android:textSize="@dimen/little_field_textsize" />
 
     <TextView
         android:id="@+id/tv_classroom"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/tv_module"
-        android:text="p42"
         android:textColor="@color/colorBrown"
         android:textSize="@dimen/little_field_textsize" />
 
