@@ -74,14 +74,15 @@ public class DashboardFragment extends Fragment {
         notificationList = (ListView) view.findViewById(R.id.lv_notif);
         logTime = (TextView) view.findViewById(R.id.tv_log_time);
         userPicture = (ImageView) view.findViewById(R.id.iv_profile);
-
-        Picasso.with(getContext())
-                .load(LoginActivity.PICTURES_URL + LoginActivity.login + ".jpg")
-                .placeholder(R.drawable.progress_animation)
-                .resize(500,500)
-                .centerCrop()
-                .into(userPicture);
-        refresh();
+        if (getContext() != null) {
+            Picasso.with(getContext())
+                    .load(LoginActivity.PICTURES_URL + LoginActivity.login + ".jpg")
+                    .placeholder(R.drawable.progress_animation)
+                    .resize(500, 500)
+                    .centerCrop()
+                    .into(userPicture);
+            refresh();
+        }
         return view;
     }
 
@@ -115,11 +116,13 @@ public class DashboardFragment extends Fragment {
     }
 
     public void setNotif(List<History> notifs) {
-        NotifcationArrayAdapter adapter;
+        if (getContext() != null) {
+            NotifcationArrayAdapter adapter;
 
-        notificationList = (ListView) view.findViewById(R.id.lv_notif);
-        adapter = new NotifcationArrayAdapter(getContext(), R.layout.row_notification, notifs);
-        notificationList.setAdapter(adapter);
+            notificationList = (ListView) view.findViewById(R.id.lv_notif);
+            adapter = new NotifcationArrayAdapter(getContext(), R.layout.row_notification, notifs);
+            notificationList.setAdapter(adapter);
+        }
     }
 
 

@@ -148,10 +148,12 @@ public class PlanningFragment extends Fragment {
         });
     }
 
-    private void setPlanningList(List<com.example.jordan.epiandroid.Models.Planning.Activity> Activities){
-        final PlanningArrayAdapter adapter = new PlanningArrayAdapter(getContext(), R.layout.row_planning, Activities);
-        if (lvPlanning != null) {
-            lvPlanning.setAdapter(adapter);
+    private void setPlanningList(List<com.example.jordan.epiandroid.Models.Planning.Activity> Activities) {
+        if (getContext() != null) {
+            final PlanningArrayAdapter adapter = new PlanningArrayAdapter(getContext(), R.layout.row_planning, Activities);
+            if (lvPlanning != null) {
+                lvPlanning.setAdapter(adapter);
+            }
         }
     }
 

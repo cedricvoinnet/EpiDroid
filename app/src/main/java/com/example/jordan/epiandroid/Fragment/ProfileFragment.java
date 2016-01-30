@@ -86,9 +86,6 @@ public class ProfileFragment extends Fragment {
 
     @OnClick(R.id.tv_mail)
     public void sendEMail() {
-        /*Intent emailIntent = new Intent(Intent.ACTION_SEND);
-        emailIntent.putExtra(android.content.Intent.EXTRA_EMAIL, tvMail.getText());
-        startActivity(emailIntent);*/
         Intent intent = new Intent(Intent.ACTION_SENDTO);
         intent.setType("message/rfc822");
         intent.putExtra(Intent.EXTRA_EMAIL, tvMail.getText());
@@ -217,24 +214,26 @@ public class ProfileFragment extends Fragment {
                 if (response.code() == 200) {
                     UserProfile user = response.body();
 
-                    if (!user.hasError()) {
-                        Picasso.with(getContext())
-                                .load(user.getPicture())
-                                .placeholder(R.drawable.progress_animation)
-                                .resize(500,500)
-                                .centerCrop()
-                                .into(ivProfilePicture);
+                    if (getContext() != null) {
+                        if (!user.hasError()) {
+                            Picasso.with(getContext())
+                                    .load(user.getPicture())
+                                    .placeholder(R.drawable.progress_animation)
+                                    .resize(500, 500)
+                                    .centerCrop()
+                                    .into(ivProfilePicture);
 
-                        tvName.setText(user.getFullName());
-                        tvYear.setText(user.getStudentYear());
-                        tvLogin.setText(user.getLogin());
-                        tvPromo.setText(user.getPromo());
-                        tvCredits.setText(user.getCredits());
-                        tvGpa.setText(user.getGpa().get(0).getGpa());
-                        tvMail.setText(user.getEmail());
-                        tvNetsoul.setText(user.getNetStat() != null ? user.getNetStat().getActive(): "N/A");
-                    } else
-                        Toast.makeText(getContext(), user.getError(), Toast.LENGTH_SHORT).show();
+                            tvName.setText(user.getFullName());
+                            tvYear.setText(user.getStudentYear());
+                            tvLogin.setText(user.getLogin());
+                            tvPromo.setText(user.getPromo());
+                            tvCredits.setText(user.getCredits());
+                            tvGpa.setText(user.getGpa().get(0).getGpa());
+                            tvMail.setText(user.getEmail());
+                            tvNetsoul.setText(user.getNetStat() != null ? user.getNetStat().getActive() : "N/A");
+                        } else
+                            Toast.makeText(getContext(), user.getError(), Toast.LENGTH_SHORT).show();
+                    }
                 }
             }
 

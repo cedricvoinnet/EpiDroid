@@ -27,7 +27,8 @@ public class ModuleArrayAdapter extends ArrayAdapter<ModuleItem> {
         super(context, layout, objects);
         this.context = context;
         objs = objects;
-        mInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        if (context != null)
+            mInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     }
 
     private static class ViewHolder {
@@ -39,7 +40,7 @@ public class ModuleArrayAdapter extends ArrayAdapter<ModuleItem> {
     public View getView(final int position, View convertView, ViewGroup parent) {
         final ViewHolder holder;
         final ModuleItem current = objs.get(position);
-        if (convertView == null) {
+        if (convertView == null && mInflater != null) {
             holder = new ViewHolder();
             convertView = mInflater.inflate(R.layout.row_module, parent, false);
             holder.tvName = (TextView) convertView.findViewById(R.id.tv_module_name);

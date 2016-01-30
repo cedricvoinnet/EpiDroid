@@ -9,8 +9,47 @@
     android:paddingBottom="@dimen/activity_vertical_margin"
     tools:context="com.example.jordan.epiandroid.Activity.ProjectsActivity">
 
+    <TextView
+        android:id="@+id/tv_grade_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/grade_title"
+        android:textStyle="bold"
+        android:textSize="@dimen/big_field_textsize"
+        android:textColor="@android:color/black"/>
+    <TextView
+        android:id="@+id/tv_grade"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tv_grade_title"
+        android:textSize="@dimen/big_field_textsize"
+        android:textColor="@color/colorBlueDark"
+        android:textStyle="bold"
+        android:text="@string/default_grade"/>
+    <TextView
+        android:id="@+id/tv_credits_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@+id/tv_grade_title"
+        android:paddingLeft="@dimen/padding_tv"
+        android:text="@string/credit_title"
+        android:textStyle="bold"
+        android:textSize="@dimen/big_field_textsize"
+        android:textColor="@android:color/black" />
+    <TextView
+        android:id="@+id/tv_credits"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tv_credits_title"
+        android:layout_toRightOf="@+id/tv_grade_title"
+        android:paddingLeft="@dimen/padding_tv"
+        android:textSize="@dimen/big_field_textsize"
+        android:textColor="@color/colorBlueDark"
+        android:textStyle="bold"
+        android:text="@string/default_credit"/>
     <ListView
         android:id="@+id/lv_note"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"></ListView>
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tv_grade"/>
 </RelativeLayout>

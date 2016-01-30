@@ -6,7 +6,8 @@
     <dimen name="nav_header_vertical_spacing">16sp</dimen>
     <dimen name="nav_header_height">160sp</dimen>
     <dimen name="fab_margin">16sp</dimen>
-    <dimen name="padding_tv">10sp</dimen>
+    <dimen name="padding_tv">20dp</dimen>
+    <dimen name="little_padding_tv">10dp</dimen>
     <dimen name="text_size">15sp</dimen>
     <dimen name="netsoul_title_padding_top">20sp</dimen>
 

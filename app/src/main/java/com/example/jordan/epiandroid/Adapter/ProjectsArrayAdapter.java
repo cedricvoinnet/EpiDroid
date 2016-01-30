@@ -32,7 +32,8 @@ public class ProjectsArrayAdapter extends ArrayAdapter<Project> {
         this.context = context;
         objs = objects;
         this.activity = activity;
-        mInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        if (context != null)
+            mInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     }
 
     private static class ViewHolder {
@@ -45,7 +46,7 @@ public class ProjectsArrayAdapter extends ArrayAdapter<Project> {
     public View getView(final int position, View convertView, ViewGroup parent) {
         final ViewHolder holder;
         final Project current = objs.get(position);
-        if (convertView == null) {
+        if (convertView == null && mInflater != null) {
             holder = new ViewHolder();
             convertView = mInflater.inflate(R.layout.row_project, parent, false);
             //this.view = convertView;

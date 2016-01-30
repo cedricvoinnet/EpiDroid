@@ -22,18 +22,24 @@
 
     <string name="action_settings">Settings</string>
 
-    <!--Profile Activity-->
+    <!--Profile Fragment-->
     <string name="button_search">Search</string>
     <string name="tv_promo">Promotion</string>
     <string name="tv_credits">Earned credits</string>
     <string name="tv_gpa">G.P.A.</string>
     <string name="tv_netsoul">Netsoul :</string>
 
-    <!--Planning Activity-->
+    <!--Planning Fragment-->
     <string name="btn_prev_day">&lt;&lt;</string>
     <string name="btn_validate_token">Validate token</string>
 
     <!--DashBoardFragment-->
     <string name="log_time_title">Log time :</string>
     <string name="btn_next_day"><![CDATA[>>]]></string>
+
+    <!--Project Activity-->
+    <string name="grade_title">Grade</string>
+    <string name="default_grade">-</string>
+    <string name="credit_title">Credits</string>
+    <string name="default_credit">0</string>
 </resources>

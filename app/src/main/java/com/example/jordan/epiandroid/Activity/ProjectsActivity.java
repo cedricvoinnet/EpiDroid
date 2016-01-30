@@ -17,8 +17,10 @@ public class ProjectsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_projects);
         Intent intent = getIntent();
         ModuleItem mi = (ModuleItem) intent.getParcelableExtra("module");
-        ProjectsArrayAdapter adapter = new ProjectsArrayAdapter(this, R.layout.fragment_module, mi.getProjects(), this);
-        ListView lvModule = (ListView) findViewById(R.id.lv_note);
-        lvModule.setAdapter(adapter);
+        if (getBaseContext() != null) {
+            ProjectsArrayAdapter adapter = new ProjectsArrayAdapter(this, R.layout.fragment_module, mi.getProjects(), this);
+            ListView lvModule = (ListView) findViewById(R.id.lv_note);
+            lvModule.setAdapter(adapter);
+        }
     }
 }
