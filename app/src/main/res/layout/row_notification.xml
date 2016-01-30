@@ -1,24 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
     android:layout_height="match_parent">
 
     <ImageView
         android:id="@+id/iv_profile_picture"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/icon_dashboard"/>
+        android:src="@drawable/icon_dashboard" />
+
     <TextView
         android:id="@+id/tv_content"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="content"
-        android:layout_toRightOf="@+id/iv_profile_picture"/>
+        android:layout_toRightOf="@+id/iv_profile_picture" />
+
     <TextView
         android:id="@+id/tv_date"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="date"
         android:layout_below="@+id/tv_content"
-        android:layout_toRightOf="@+id/iv_profile_picture"/>
+        android:layout_toRightOf="@+id/iv_profile_picture" />
 </RelativeLayout>

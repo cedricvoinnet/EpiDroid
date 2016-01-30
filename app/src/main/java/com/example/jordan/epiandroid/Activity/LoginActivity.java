@@ -8,14 +8,14 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
-import android.widget.ShareActionProvider;
 import android.widget.Toast;
 
 import com.example.jordan.epiandroid.APIIntra.APIRequest;
-import com.example.jordan.epiandroid.Model.Token;
+import com.example.jordan.epiandroid.Models.Login.Token;
 import com.example.jordan.epiandroid.R;
 
 import retrofit2.Call;
@@ -26,7 +26,7 @@ import retrofit2.Retrofit;
 public class LoginActivity extends AppCompatActivity {
 
     public static String API_URL = "http://epitech-api.herokuapp.com";
-    public static String PICTURES_URL = "https://cdn.local.epitech.eu/userprofil/";
+    public static String PICTURES_URL = "https://cdn.local.epitech.eu/userprofil/profilview/";
     public static String sessionToken = null;
     public static String login = null;
 
@@ -66,7 +66,7 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     @Override
-    protected void onResume(){
+    protected void onResume() {
         super.onResume();
     }
 
@@ -75,6 +75,12 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void attemptLogin() {
+        View view = this.getCurrentFocus();
+
+        if (view != null) {
+            InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+            imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+        }
         mLoginView.setError(null);
         mPasswordView.setError(null);
 
@@ -116,7 +122,7 @@ public class LoginActivity extends AppCompatActivity {
 
                 @Override
                 public void onResponse(retrofit2.Response<Token> response) {
-                    mProgressBar.setVisibility(View.INVISIBLE);
+                    mProgressBar.setVisibility(View.GONE);
                     if (response.code() == 200) {
                         Token t = response.body();
                         Log.d("Token", "Token: " + t.getToken());
@@ -135,7 +141,7 @@ public class LoginActivity extends AppCompatActivity {
 
                 @Override
                 public void onFailure(Throwable throwable) {
-                    mProgressBar.setVisibility(View.INVISIBLE);
+                    mProgressBar.setVisibility(View.GONE);
                     Toast.makeText(context, R.string.network_error, Toast.LENGTH_SHORT).show();
                     Log.d("Token", "Can't access to network");
                 }

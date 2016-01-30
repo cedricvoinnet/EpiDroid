@@ -10,7 +10,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.example.jordan.epiandroid.Activity.ProjectsActivity;
-import com.example.jordan.epiandroid.Model.ModuleItem;
+import com.example.jordan.epiandroid.Models.ModuleItem;
 import com.example.jordan.epiandroid.R;
 
 import java.util.List;
@@ -40,8 +40,8 @@ public class ModuleArrayAdapter extends ArrayAdapter<ModuleItem> {
         final ViewHolder holder;
         final ModuleItem current = objs.get(position);
         if (convertView == null) {
-            holder                      = new ViewHolder();
-            convertView                 = mInflater.inflate(R.layout.row_module, parent, false);
+            holder = new ViewHolder();
+            convertView = mInflater.inflate(R.layout.row_module, parent, false);
             holder.tvName = (TextView) convertView.findViewById(R.id.tv_module_name);
             holder.tvName.setText(current.getName());
             holder.tvName.setOnClickListener(new View.OnClickListener() {
@@ -53,8 +53,7 @@ public class ModuleArrayAdapter extends ArrayAdapter<ModuleItem> {
                 }
             });
             convertView.setTag(holder);
-        }
-        else {
+        } else {
             holder = (ViewHolder) convertView.getTag();
         }
 

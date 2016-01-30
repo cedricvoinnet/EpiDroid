@@ -10,8 +10,8 @@ import android.view.ViewGroup;
 import android.widget.ListView;
 
 import com.example.jordan.epiandroid.Adapter.ModuleArrayAdapter;
-import com.example.jordan.epiandroid.Model.ModuleItem;
-import com.example.jordan.epiandroid.Model.Project;
+import com.example.jordan.epiandroid.Models.ModuleItem;
+import com.example.jordan.epiandroid.Models.Project;
 import com.example.jordan.epiandroid.R;
 
 import java.util.ArrayList;
@@ -38,6 +38,7 @@ public class ModuleFragment extends Fragment {
     private OnFragmentInteractionListener mListener;
 
     private View view;
+
     /**
      * Use this factory method to create a new instance of
      * this fragment using the provided parameters.
@@ -79,7 +80,7 @@ public class ModuleFragment extends Fragment {
         projects.add(new Project("projet 6", "gggwpgwpgwpgwpgwpgwpgwpgwpgwpgwpgwpgwpgwpgwpgwpgwpgwpgwpgwpgwpgwpgwpgwpgwpwp", "12"));
         projects.add(new Project("projet 7", "gggwpgwpgwpgwpgwpgwpgwpgwpgwpgwpgwpgwpgwpgwpgwpgwpgwpgwpgwpgwpgwpgwpgwpgwpgwpgwpgwpgwpgwpgwpvvwp", "12"));
 
-        List<ModuleItem> modules= new ArrayList<ModuleItem>();
+        List<ModuleItem> modules = new ArrayList<ModuleItem>();
         ModuleItem mi = new ModuleItem("B1 TAMER", projects);
         modules.add(mi);
         modules.add(mi);

@@ -1,38 +1,24 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.example.jordan.epiandroid.Fragment.PlanningFragment">
 
-    <Button
-        android:id="@+id/btn_prev_day"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/btn_prev_day"
-        android:background="@color/colorOrange" />
     <TextView
         android:id="@+id/date"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="2016-01-25"
         android:textSize="@dimen/big_field_textsize"
+        android:padding="20sp"
         android:gravity="center"
-        android:layout_above="@+id/lv_planning"
         android:layout_centerHorizontal="true"
-        android:layout_alignParentTop="true" />
-    <Button
-        android:id="@+id/btn_next_day"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@color/colorOrange"
-        android:text=">>"
         android:layout_alignParentTop="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
+        android:background="@color/colorOrange"/>
+
     <ListView
         android:id="@+id/lv_planning"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/btn_prev_day"
-        android:clickable="false">
-    </ListView>
+        android:layout_below="@+id/date"
+        android:clickable="false"></ListView>
 </RelativeLayout>

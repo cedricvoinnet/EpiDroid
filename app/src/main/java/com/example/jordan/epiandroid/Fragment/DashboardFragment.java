@@ -1,10 +1,7 @@
 package com.example.jordan.epiandroid.Fragment;
 
 import android.app.Activity;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.net.Uri;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
@@ -14,16 +11,17 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.jordan.epiandroid.APIIntra.APIRequest;
 import com.example.jordan.epiandroid.Activity.LoginActivity;
 import com.example.jordan.epiandroid.Adapter.NotifcationArrayAdapter;
-import com.example.jordan.epiandroid.Model.Current;
-import com.example.jordan.epiandroid.Model.DashInfos;
-import com.example.jordan.epiandroid.Model.History;
+import com.example.jordan.epiandroid.Models.DashBoard.Current;
+import com.example.jordan.epiandroid.Models.DashBoard.DashInfos;
+import com.example.jordan.epiandroid.Models.DashBoard.History;
 import com.example.jordan.epiandroid.R;
+import com.squareup.picasso.Picasso;
 
-import java.io.InputStream;
 import java.util.List;
 
 import retrofit2.Call;
@@ -77,12 +75,17 @@ public class DashboardFragment extends Fragment {
         logTime = (TextView) view.findViewById(R.id.tv_log_time);
         userPicture = (ImageView) view.findViewById(R.id.iv_profile);
 
-        //ACTIVER PROGRESSBAR
-        initMembers();
+        Picasso.with(getContext())
+                .load(LoginActivity.PICTURES_URL + LoginActivity.login + ".jpg")
+                .placeholder(R.drawable.progress_animation)
+                .resize(500,500)
+                .centerCrop()
+                .into(userPicture);
+        refresh();
         return view;
     }
 
-    private void initMembers() {
+    private void refresh() {
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(LoginActivity.API_URL)
                 .addConverterFactory(GsonConverterFactory.create())
@@ -95,8 +98,6 @@ public class DashboardFragment extends Fragment {
             public void onResponse(Response<DashInfos> response) {
                 Log.d("DashBoard", "Success");
                 if (response.code() == 200) {
-                    new DownloadImageTask(userPicture).execute(LoginActivity.PICTURES_URL + LoginActivity.login + ".bmp");
-
                     DashInfos infos = response.body();
 
                     setNotif(infos.getHistory());
@@ -107,6 +108,7 @@ public class DashboardFragment extends Fragment {
             @Override
             public void onFailure(Throwable t) {
                 //DESACTIVER PROGRESSBAR
+                Toast.makeText(getContext(), R.string.network_error, Toast.LENGTH_SHORT).show();
                 Log.d("DashBoard", "Fail");
             }
         });
@@ -162,32 +164,5 @@ public class DashboardFragment extends Fragment {
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
-    }
-
-    private class DownloadImageTask extends AsyncTask<String, Void, Bitmap> {
-        ImageView bmImage;
-
-        public DownloadImageTask(ImageView bmImage) {
-            this.bmImage = bmImage;
-        }
-
-        protected Bitmap doInBackground(String... urls) {
-            String urldisplay = urls[0];
-            Bitmap mIcon11 = null;
-            try {
-                InputStream in = new java.net.URL(urldisplay).openStream();
-                mIcon11 = BitmapFactory.decodeStream(in);
-            } catch (Exception e) {
-                Log.e("Error", e.getMessage());
-                e.printStackTrace();
-            }
-            return mIcon11;
-        }
-
-        protected void onPostExecute(Bitmap result) {
-            if (result != null)
-                bmImage.setImageBitmap(result);
-            //DESACTIVER LA PROGRESSBAR
-        }
     }
 }

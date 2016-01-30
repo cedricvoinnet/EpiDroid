@@ -1,4 +1,4 @@
-package com.example.jordan.epiandroid.Model;
+package com.example.jordan.epiandroid.Models;
 
 import android.os.Parcel;
 import android.os.Parcelable;
@@ -13,7 +13,7 @@ public class ModuleItem implements Parcelable {
     private String name;
     List<Project> projects;
 
-    public ModuleItem (String name, List<Project> projects) {
+    public ModuleItem(String name, List<Project> projects) {
         this.name = name;
         this.projects = projects;
     }

@@ -1,5 +1,6 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.example.jordan.epiandroid.Fragment.DashboardFragment">
 
@@ -7,15 +8,16 @@
         android:id="@+id/iv_profile"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:src="@drawable/icon_epiandroid"/>
+        android:layout_centerHorizontal="true" />
+
     <TextView
         android:id="@+id/tv_log_time_title"
         android:layout_below="@+id/iv_profile"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="@dimen/big_field_textsize"
-        android:text="@string/log_time_title"/>
+        android:text="@string/log_time_title" />
+
     <TextView
         android:id="@+id/tv_log_time"
         android:textSize="@dimen/big_field_textsize"
@@ -23,10 +25,10 @@
         android:layout_below="@+id/tv_log_time_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
+
     <ListView
         android:id="@+id/lv_notif"
         android:layout_below="@+id/tv_log_time"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-    </ListView>
+        android:layout_height="wrap_content"></ListView>
 </RelativeLayout>

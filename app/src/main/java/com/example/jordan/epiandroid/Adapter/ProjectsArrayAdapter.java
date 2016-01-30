@@ -12,8 +12,7 @@ import android.widget.ArrayAdapter;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.example.jordan.epiandroid.Activity.ProjectsActivity;
-import com.example.jordan.epiandroid.Model.Project;
+import com.example.jordan.epiandroid.Models.Project;
 import com.example.jordan.epiandroid.R;
 
 import java.util.List;
@@ -47,8 +46,8 @@ public class ProjectsArrayAdapter extends ArrayAdapter<Project> {
         final ViewHolder holder;
         final Project current = objs.get(position);
         if (convertView == null) {
-            holder                      = new ViewHolder();
-            convertView                 = mInflater.inflate(R.layout.row_project, parent, false);
+            holder = new ViewHolder();
+            convertView = mInflater.inflate(R.layout.row_project, parent, false);
             //this.view = convertView;
             holder.tvName = (TextView) convertView.findViewById(R.id.tv_name);
             holder.tvName.setText(current.getName());
@@ -76,8 +75,7 @@ public class ProjectsArrayAdapter extends ArrayAdapter<Project> {
                 }
             });
             convertView.setTag(holder);
-        }
-        else {
+        } else {
             holder = (ViewHolder) convertView.getTag();
         }
 

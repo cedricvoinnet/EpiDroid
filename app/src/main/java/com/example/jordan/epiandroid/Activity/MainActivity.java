@@ -4,14 +4,14 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.util.Log;
-import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.MenuItem;
 
 import com.example.jordan.epiandroid.Fragment.DashboardFragment;
@@ -24,7 +24,7 @@ public class MainActivity extends AppCompatActivity implements
         ModuleFragment.OnFragmentInteractionListener,
         PlanningFragment.OnFragmentInteractionListener,
         ProfileFragment.OnFragmentInteractionListener,
-        DashboardFragment.OnFragmentInteractionListener{
+        DashboardFragment.OnFragmentInteractionListener {
 
     private DrawerLayout mDrawer;
     private NavigationView nvDrawer;

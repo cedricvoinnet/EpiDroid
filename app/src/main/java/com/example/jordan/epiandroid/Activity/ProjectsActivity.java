@@ -1,12 +1,12 @@
 package com.example.jordan.epiandroid.Activity;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.widget.ListView;
 
 import com.example.jordan.epiandroid.Adapter.ProjectsArrayAdapter;
-import com.example.jordan.epiandroid.Model.ModuleItem;
+import com.example.jordan.epiandroid.Models.ModuleItem;
 import com.example.jordan.epiandroid.R;
 
 public class ProjectsActivity extends AppCompatActivity {
