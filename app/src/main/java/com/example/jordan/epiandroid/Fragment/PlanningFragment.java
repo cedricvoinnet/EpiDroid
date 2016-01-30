@@ -1,6 +1,7 @@
 package com.example.jordan.epiandroid.Fragment;
 
 import android.app.Activity;
+import android.app.DatePickerDialog;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -8,7 +9,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -21,6 +22,8 @@ import com.example.jordan.epiandroid.R;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Locale;
 
@@ -41,17 +44,13 @@ import retrofit2.Retrofit;
  * create an instance of this fragment.
  */
 public class PlanningFragment extends Fragment {
-
-    @Bind(R.id.btn_prev_day)
-    Button btnPrevDay;
     @Bind(R.id.date)
     TextView date;
-    @Bind(R.id.btn_next_day)
-    Button btnNextDay;
     @Bind(R.id.lv_planning)
     ListView lvPlanning;
     private View view;
 
+    private DatePickerDialog datePicker;
     private SimpleDateFormat APIDateFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.FRANCE);
 
     private OnFragmentInteractionListener mListener;
@@ -84,14 +83,31 @@ public class PlanningFragment extends Fragment {
         date = (TextView) view.findViewById(R.id.date);
 
         Calendar c = Calendar.getInstance();
-        date.setText(APIDateFormat.format(c.getTime()));
+        datePicker= new DatePickerDialog(getContext(), new DatePickerDialog.OnDateSetListener() {
 
-        initMembers();
+            public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+                Calendar newDate = Calendar.getInstance();
+                newDate.set(year, monthOfYear, dayOfMonth);
+                date.setText(APIDateFormat.format(newDate.getTime()));
+                getDayPlanning();
+            }
+
+        },c.get(Calendar.YEAR), c.get(Calendar.MONTH), c.get(Calendar.DAY_OF_MONTH));
+
+        date.setText(APIDateFormat.format(c.getTime()));
+        date.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                datePicker.show();
+            }
+        });
+
+        getDayPlanning();
         ButterKnife.bind(this, view);
         return view;
     }
 
-    private void initMembers() {
+    private void getDayPlanning() {
         ListView lvPlanning = (ListView) view.findViewById(R.id.lv_planning);
 
         Retrofit retrofit = new Retrofit.Builder()
@@ -108,12 +124,19 @@ public class PlanningFragment extends Fragment {
                 Log.d("Planning", "Success");
                 if (response.code() == 200) {
                     List<com.example.jordan.epiandroid.Models.Planning.Activity> tmp = response.body();
-                    List<com.example.jordan.epiandroid.Models.Planning.Activity> Activities = new ArrayList<>();
+                    List<com.example.jordan.epiandroid.Models.Planning.Activity> activities = new ArrayList<>();
                     for (com.example.jordan.epiandroid.Models.Planning.Activity act : tmp) {
                         if (act.getModuleRegistered())
-                            Activities.add(act);
+                            activities.add(act);
                     }
-                    setPlanningList(Activities);
+                    Collections.sort(activities, new Comparator<com.example.jordan.epiandroid.Models.Planning.Activity>() {
+                        @Override
+                        public int compare(com.example.jordan.epiandroid.Models.Planning.Activity lhs, com.example.jordan.epiandroid.Models.Planning.Activity rhs) {
+                            return lhs.getStart().compareToIgnoreCase(rhs.getStart());
+                        }
+                    });
+
+                    setPlanningList(activities);
                 }
             }
 

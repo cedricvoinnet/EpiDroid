@@ -1,10 +1,12 @@
 package com.example.jordan.epiandroid.Adapter;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -12,6 +14,9 @@ import com.example.jordan.epiandroid.Models.Planning.Activity;
 import com.example.jordan.epiandroid.Models.PlanningItem;
 import com.example.jordan.epiandroid.R;
 
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 public class PlanningArrayAdapter extends ArrayAdapter<Activity> {
@@ -30,6 +35,7 @@ public class PlanningArrayAdapter extends ArrayAdapter<Activity> {
         TextView tvHour;
         TextView tvModule;
         TextView tvClassroom;
+        Button      btnValidate;
     }
 
     @Override
@@ -44,13 +50,21 @@ public class PlanningArrayAdapter extends ArrayAdapter<Activity> {
             holder.tvName.setText(current.getActiTitle());
 
             holder.tvHour = (TextView) convertView.findViewById(R.id.tv_hour);
-            holder.tvHour.setText(current.getStart());
+            String start = current.getStart().split(" ")[1];
+            String end = current.getEnd().split(" ")[1];
+            String hour = start + " - " + end;
+            holder.tvHour.setText(hour);
 
             holder.tvModule = (TextView) convertView.findViewById(R.id.tv_module);
             holder.tvModule.setText(current.getTitlemodule());
 
             holder.tvClassroom = (TextView) convertView.findViewById(R.id.tv_classroom);
             holder.tvClassroom.setText(current.getRoom() != null ? current.getRoom().getCode() : "N/A");
+
+            Log.d("Planning", "Registered: " + current.getEventRegistered());
+            holder.btnValidate = (Button) convertView.findViewById(R.id.b_validate_token);
+            if (!current.getEventRegistered())
+                holder.btnValidate.setVisibility(View.INVISIBLE);
 
             convertView.setTag(holder);
         } else {
