@@ -221,6 +221,8 @@ public class ProfileFragment extends Fragment {
                         Picasso.with(getContext())
                                 .load(user.getPicture())
                                 .placeholder(R.drawable.progress_animation)
+                                .resize(500,500)
+                                .centerCrop()
                                 .into(ivProfilePicture);
 
                         tvName.setText(user.getFullName());

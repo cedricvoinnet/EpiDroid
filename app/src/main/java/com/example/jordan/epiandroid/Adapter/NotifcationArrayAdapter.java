@@ -1,6 +1,8 @@
 package com.example.jordan.epiandroid.Adapter;
 
 import android.content.Context;
+import android.net.Uri;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,12 +12,10 @@ import android.widget.TextView;
 
 import com.example.jordan.epiandroid.Models.DashBoard.History;
 import com.example.jordan.epiandroid.R;
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
-/**
- * Created by jordan on 26/01/2016.
- */
 public class NotifcationArrayAdapter extends ArrayAdapter<History> {
     private static LayoutInflater mInflater = null;
     private static List<History> objs;
@@ -41,6 +41,15 @@ public class NotifcationArrayAdapter extends ArrayAdapter<History> {
         if (convertView == null) {
             holder = new ViewHolder();
             convertView = mInflater.inflate(R.layout.row_notification, parent, false);
+            if (current.getUser().getPicture() != null) {
+                Log.d("DashBoard", current.getUser().getPicture().replace("userprofil/", "userprofil/profilview/").replace(".bmp", ".jpg"));
+                holder.picture = (ImageView) convertView.findViewById(R.id.iv_profile_picture);
+                Picasso.with(context)
+                        .load(current.getUser().getPicture().replace("userprofil/", "userprofil/profilview/").replace(".bmp", ".jpg"))
+                        .placeholder(R.drawable.progress_animation)
+                        .error(R.drawable.icon_dashboard)
+                        .into(holder.picture);
+            }
             holder.tvContent = (TextView) convertView.findViewById(R.id.tv_content);
             holder.tvContent.setText(android.text.Html.fromHtml(current.getTitle()));
             holder.tvDate = (TextView) convertView.findViewById(R.id.tv_date);

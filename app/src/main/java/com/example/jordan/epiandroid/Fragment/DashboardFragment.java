@@ -78,6 +78,8 @@ public class DashboardFragment extends Fragment {
         Picasso.with(getContext())
                 .load(LoginActivity.PICTURES_URL + LoginActivity.login + ".jpg")
                 .placeholder(R.drawable.progress_animation)
+                .resize(500,500)
+                .centerCrop()
                 .into(userPicture);
         refresh();
         return view;

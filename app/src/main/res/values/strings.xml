@@ -6,7 +6,7 @@
     <string name="prompt_password">Password</string>
     <string name="action_log_in">Log in</string>
     <string name="action_sign_in_short">Sign in</string>
-    <string name="error_invalid_login">This email address is invalid</string>
+    <string name="error_invalid_login">This login is invalid</string>
     <string name="error_invalid_password">This password is too short</string>
     <string name="error_field_required">This field is required</string>
     <string name="connection_error">Wrong credentials</string>
@@ -31,8 +31,8 @@
 
     <!--Planning Activity-->
     <string name="btn_prev_day">&lt;&lt;</string>
-    <string name="btn_validate_token">Valider token</string>
+    <string name="btn_validate_token">Validate token</string>
 
     <!--DashBoardFragment-->
-    <string name="log_time_title">Temps de log :</string>
+    <string name="log_time_title">Log time :</string>
 </resources>
