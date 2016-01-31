@@ -98,7 +98,8 @@ public class PlanningArrayAdapter extends ArrayAdapter<Activity> {
                                         Log.d("Token", "code: " + response.code());
                                         Token r = response.body();
 
-                                        Toast.makeText(context, r.getError(), Toast.LENGTH_SHORT).show();
+                                        if (r.getError() != null)
+                                            Toast.makeText(context, r.getError(), Toast.LENGTH_SHORT).show();
                                         dialog.dismiss();
                                     }
 
