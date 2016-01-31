@@ -18,6 +18,7 @@ import com.example.jordan.epiandroid.Fragment.DashboardFragment;
 import com.example.jordan.epiandroid.Fragment.ModuleFragment;
 import com.example.jordan.epiandroid.Fragment.PlanningFragment;
 import com.example.jordan.epiandroid.Fragment.ProfileFragment;
+import com.example.jordan.epiandroid.Models.DashBoard.Infos;
 import com.example.jordan.epiandroid.R;
 
 public class MainActivity extends AppCompatActivity implements
@@ -25,6 +26,12 @@ public class MainActivity extends AppCompatActivity implements
         PlanningFragment.OnFragmentInteractionListener,
         ProfileFragment.OnFragmentInteractionListener,
         DashboardFragment.OnFragmentInteractionListener {
+
+    public static String API_URL = "http://epitech-api.herokuapp.com";
+    public static String PICTURES_URL = "https://cdn.local.epitech.eu/userprofil/profilview/";
+
+    public static String sessionToken = null;
+    public static String login = null;
 
     private DrawerLayout mDrawer;
     private NavigationView nvDrawer;

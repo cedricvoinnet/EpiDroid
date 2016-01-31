@@ -21,6 +21,7 @@ import android.widget.Toast;
 
 import com.example.jordan.epiandroid.APIIntra.APIRequest;
 import com.example.jordan.epiandroid.Activity.LoginActivity;
+import com.example.jordan.epiandroid.Activity.MainActivity;
 import com.example.jordan.epiandroid.Models.Profile.UserProfile;
 import com.example.jordan.epiandroid.R;
 import com.squareup.picasso.Picasso;
@@ -149,7 +150,7 @@ public class ProfileFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_profile, container, false);
 
-        refresh(LoginActivity.login);
+        refresh(MainActivity.login);
 
         ButterKnife.bind(this, view);
         return view;
@@ -202,11 +203,11 @@ public class ProfileFragment extends Fragment {
 
     public void refresh(String user) {
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(LoginActivity.API_URL)
+                .baseUrl(MainActivity.API_URL)
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
         APIRequest request = retrofit.create(APIRequest.class);
-        Call<UserProfile> call = request.getUser(LoginActivity.sessionToken, user);
+        Call<UserProfile> call = request.getUser(MainActivity.sessionToken, user);
         call.enqueue(new Callback<UserProfile>() {
             @Override
             public void onResponse(Response<UserProfile> response) {

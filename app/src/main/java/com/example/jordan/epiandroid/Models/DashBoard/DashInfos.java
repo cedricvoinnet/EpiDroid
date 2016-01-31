@@ -7,6 +7,7 @@ public class DashInfos {
 
     private String ip;
     private List<History> history = new ArrayList<>();
+    private Infos         infos;
     private List<Current> current = new ArrayList<>();
 
     /**
@@ -49,5 +50,13 @@ public class DashInfos {
      */
     public void setCurrent(List<Current> current) {
         this.current = current;
+    }
+
+    public Infos getInfos() {
+        return infos;
+    }
+
+    public void setInfos(Infos infos) {
+        this.infos = infos;
     }
 }

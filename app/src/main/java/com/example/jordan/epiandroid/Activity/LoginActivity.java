@@ -21,14 +21,10 @@ import com.example.jordan.epiandroid.R;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.GsonConverterFactory;
+import retrofit2.Response;
 import retrofit2.Retrofit;
 
 public class LoginActivity extends AppCompatActivity {
-
-    public static String API_URL = "http://epitech-api.herokuapp.com";
-    public static String PICTURES_URL = "https://cdn.local.epitech.eu/userprofil/profilview/";
-    public static String sessionToken = null;
-    public static String login = null;
 
     private Context context;
 
@@ -113,7 +109,7 @@ public class LoginActivity extends AppCompatActivity {
         } else {
             mProgressBar.setVisibility(View.VISIBLE);
             Retrofit retrofit = new Retrofit.Builder()
-                    .baseUrl(API_URL)
+                    .baseUrl(MainActivity.API_URL)
                     .addConverterFactory(GsonConverterFactory.create())
                     .build();
             APIRequest requests = retrofit.create(APIRequest.class);
@@ -121,16 +117,16 @@ public class LoginActivity extends AppCompatActivity {
             call.enqueue(new Callback<Token>() {
 
                 @Override
-                public void onResponse(retrofit2.Response<Token> response) {
+                public void onResponse(Response<Token> response) {
                     mProgressBar.setVisibility(View.GONE);
                     if (response.code() == 200) {
                         Token t = response.body();
                         Log.d("Token", "Token: " + t.getToken());
-                        sessionToken = t.getToken();
+                        MainActivity.sessionToken = t.getToken();
                         SharedPreferences pref = getSharedPreferences("EpiPrefs", MODE_PRIVATE);
                         pref.edit().putString("login", login).apply();
                         pref.edit().putString("password", password).apply();
-                        LoginActivity.login = login;
+                        MainActivity.login = login;
                         Intent intent = new Intent(context, MainActivity.class);
                         startActivity(intent);
                     } else {

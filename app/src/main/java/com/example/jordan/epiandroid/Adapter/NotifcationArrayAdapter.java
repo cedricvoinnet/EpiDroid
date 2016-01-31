@@ -1,7 +1,6 @@
 package com.example.jordan.epiandroid.Adapter;
 
 import android.content.Context;
-import android.net.Uri;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -29,37 +28,26 @@ public class NotifcationArrayAdapter extends ArrayAdapter<History> {
             mInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     }
 
-    private static class ViewHolder {
-        ImageView picture;
-        TextView tvContent;
-        TextView tvDate;
-    }
-
     @Override
     public View getView(final int position, View convertView, ViewGroup parent) {
-        final ViewHolder holder;
         final History current = objs.get(position);
         if (convertView == null && mInflater != null) {
-            holder = new ViewHolder();
             convertView = mInflater.inflate(R.layout.row_notification, parent, false);
-            if (current.getUser().getPicture() != null) {
-                Log.d("DashBoard", current.getUser().getPicture().replace("userprofil/", "userprofil/profilview/").replace(".bmp", ".jpg"));
-                holder.picture = (ImageView) convertView.findViewById(R.id.iv_profile_picture);
-                Picasso.with(context)
-                        .load(current.getUser().getPicture().replace("userprofil/", "userprofil/profilview/").replace(".bmp", ".jpg"))
-                        .placeholder(R.drawable.progress_animation)
-                        .error(R.drawable.icon_dashboard)
-                        .into(holder.picture);
-            }
-            holder.tvContent = (TextView) convertView.findViewById(R.id.tv_content);
-            holder.tvContent.setText(android.text.Html.fromHtml(current.getTitle()));
-            holder.tvDate = (TextView) convertView.findViewById(R.id.tv_date);
-            holder.tvDate.setText(current.getDate());
-
-            convertView.setTag(holder);
-        } else {
-            holder = (ViewHolder) convertView.getTag();
         }
+        if (current.getUser().getPicture() != null) {
+            Log.d("DashBoard", current.getUser().getPicture().replace("userprofil/", "userprofil/profilview/").replace(".bmp", ".jpg"));
+            ImageView picture = (ImageView) convertView.findViewById(R.id.iv_profile_picture);
+            Picasso.with(context)
+                    .load(current.getUser().getPicture().replace("userprofil/", "userprofil/profilview/").replace(".bmp", ".jpg"))
+                    .placeholder(R.drawable.progress_animation)
+                    .error(R.drawable.icon_dashboard)
+                    .into(picture);
+        }
+        TextView tvContent = (TextView) convertView.findViewById(R.id.tv_content);
+        tvContent.setText(android.text.Html.fromHtml(current.getTitle()));
+        TextView tvDate = (TextView) convertView.findViewById(R.id.tv_date);
+        tvDate.setText(current.getDate());
+
 
         return convertView;
     }

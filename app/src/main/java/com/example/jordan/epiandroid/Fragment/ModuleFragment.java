@@ -1,21 +1,35 @@
 package com.example.jordan.epiandroid.Fragment;
 
 import android.app.Activity;
+import android.content.ClipData;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
+import android.widget.Toast;
 
+import com.example.jordan.epiandroid.APIIntra.APIRequest;
+import com.example.jordan.epiandroid.Activity.MainActivity;
 import com.example.jordan.epiandroid.Adapter.ModuleArrayAdapter;
-import com.example.jordan.epiandroid.Models.ModuleItem;
-import com.example.jordan.epiandroid.Models.Project;
+import com.example.jordan.epiandroid.Models.ModulesMarks.AllModules;
+import com.example.jordan.epiandroid.Models.ModulesMarks.Items;
+import com.example.jordan.epiandroid.Models.ModulesMarks.Modules;
 import com.example.jordan.epiandroid.R;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.GsonConverterFactory;
+import retrofit2.JacksonConverterFactory;
+import retrofit2.Response;
+import retrofit2.Retrofit;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -26,14 +40,6 @@ import java.util.List;
  * create an instance of this fragment.
  */
 public class ModuleFragment extends Fragment {
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
 
     private OnFragmentInteractionListener mListener;
 
@@ -49,54 +55,62 @@ public class ModuleFragment extends Fragment {
      */
     // TODO: Rename and change types and number of parameters
     public static ModuleFragment newInstance(String param1, String param2) {
-        ModuleFragment fragment = new ModuleFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
+        return new ModuleFragment();
     }
 
     public ModuleFragment() {
-        // Required empty public constructor
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
-    }
-
-    private void initMembers() {
-        List<Project> projects = new ArrayList<Project>();
-        projects.add(new Project("projet 1", "ggwp", "12"));
-        projects.add(new Project("projet 2", "gggwpgwpgwpgwpwp", "12"));
-        projects.add(new Project("projet 3", "ggwgwpgwpgwpgwpgwpgwpgwpgwpgwpgwpp", "12"));
-        projects.add(new Project("projet 4", "gggwpgwpgwpgwpgwpgwpgwpgwpgwpwp", "12"));
-        projects.add(new Project("projet 5", "gggwpgwpgwpgwpwp", "12"));
-        projects.add(new Project("projet 6", "gggwpgwpgwpgwpgwpgwpgwpgwpgwpgwpgwpgwpgwpgwpgwpgwpgwpgwpgwpgwpgwpgwpgwpgwpwp", "12"));
-        projects.add(new Project("projet 7", "gggwpgwpgwpgwpgwpgwpgwpgwpgwpgwpgwpgwpgwpgwpgwpgwpgwpgwpgwpgwpgwpgwpgwpgwpgwpgwpgwpgwpgwpgwpvvwp", "12"));
-
-        List<ModuleItem> modules = new ArrayList<ModuleItem>();
-        ModuleItem mi = new ModuleItem("B1 TAMER", projects);
-        modules.add(mi);
-        modules.add(mi);
-
-        ModuleArrayAdapter adapter = new ModuleArrayAdapter(getContext(), R.layout.fragment_module, modules);
-        ListView lvModule = (ListView) view.findViewById(R.id.lv_module);
-        lvModule.setAdapter(adapter);
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
         view = inflater.inflate(R.layout.fragment_module, container, false);
-        initMembers();
+        getModules();
         return view;
+    }
+
+    private void getModules() {
+        ObjectMapper mapper = new ObjectMapper();
+
+        mapper.configure(com.fasterxml.jackson.core.JsonParser.Feature.ALLOW_UNQUOTED_FIELD_NAMES, true);
+
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(MainActivity.API_URL)
+                .addConverterFactory(JacksonConverterFactory.create(mapper))
+                .build();
+
+        final APIRequest request = retrofit.create(APIRequest.class);
+
+        Call<Modules> call = request.getModules(MainActivity.sessionToken);
+        call.enqueue(new Callback<Modules>() {
+            @Override
+            public void onResponse(Response<Modules> response) {
+                if (response.code() == 200) {
+                    Modules modules = response.body();
+                    setModules(modules);
+                }
+            }
+
+            @Override
+            public void onFailure(Throwable t) {
+                Log.d("Module", t.toString());
+                Toast.makeText(getContext(), R.string.network_error, Toast.LENGTH_SHORT).show();
+                Log.d("Modules", "Can't access to network");
+            }
+        });
+    }
+
+    private void setModules(Modules modules){
+        ListView lvModule = (ListView) view.findViewById(R.id.lv_module);
+        lvModule.setAdapter(null);
+
+        ModuleArrayAdapter adapter = new ModuleArrayAdapter(getContext(), R.layout.fragment_module, modules.getModules());
+        lvModule.setAdapter(adapter);
     }
 
     // TODO: Rename method, update argument and hook method into UI event

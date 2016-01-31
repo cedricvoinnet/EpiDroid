@@ -15,6 +15,7 @@ import android.widget.Toast;
 
 import com.example.jordan.epiandroid.APIIntra.APIRequest;
 import com.example.jordan.epiandroid.Activity.LoginActivity;
+import com.example.jordan.epiandroid.Activity.MainActivity;
 import com.example.jordan.epiandroid.Adapter.NotifcationArrayAdapter;
 import com.example.jordan.epiandroid.Models.DashBoard.Current;
 import com.example.jordan.epiandroid.Models.DashBoard.DashInfos;
@@ -76,7 +77,7 @@ public class DashboardFragment extends Fragment {
         userPicture = (ImageView) view.findViewById(R.id.iv_profile);
         if (getContext() != null) {
             Picasso.with(getContext())
-                    .load(LoginActivity.PICTURES_URL + LoginActivity.login + ".jpg")
+                    .load(MainActivity.PICTURES_URL + MainActivity.login + ".jpg")
                     .placeholder(R.drawable.progress_animation)
                     .resize(500, 500)
                     .centerCrop()
@@ -88,12 +89,12 @@ public class DashboardFragment extends Fragment {
 
     private void refresh() {
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(LoginActivity.API_URL)
+                .baseUrl(MainActivity.API_URL)
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
 
         APIRequest request = retrofit.create(APIRequest.class);
-        Call<DashInfos> call = request.getInfos(LoginActivity.sessionToken);
+        Call<DashInfos> call = request.getInfos(MainActivity.sessionToken);
         call.enqueue(new Callback<DashInfos>() {
             @Override
             public void onResponse(Response<DashInfos> response) {

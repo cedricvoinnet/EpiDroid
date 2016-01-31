@@ -145,7 +145,7 @@ public class Activity {
 
     @SerializedName("event_registered")
     @Expose
-    private Boolean eventRegistered;
+    private String eventRegistered;
 
     @SerializedName("end")
     @Expose
@@ -652,14 +652,14 @@ public class Activity {
     /**
      * @return The eventRegistered
      */
-    public Boolean getEventRegistered() {
+    public String getEventRegistered() {
         return eventRegistered;
     }
 
     /**
      * @param eventRegistered The event_registered
      */
-    public void setEventRegistered(Boolean eventRegistered) {
+    public void setEventRegistered(String eventRegistered) {
         this.eventRegistered = eventRegistered;
     }
 

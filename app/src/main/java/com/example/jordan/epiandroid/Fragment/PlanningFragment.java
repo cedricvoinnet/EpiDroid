@@ -16,6 +16,7 @@ import android.widget.Toast;
 
 import com.example.jordan.epiandroid.APIIntra.APIRequest;
 import com.example.jordan.epiandroid.Activity.LoginActivity;
+import com.example.jordan.epiandroid.Activity.MainActivity;
 import com.example.jordan.epiandroid.Adapter.PlanningArrayAdapter;
 import com.example.jordan.epiandroid.R;
 
@@ -109,15 +110,16 @@ public class PlanningFragment extends Fragment {
 
     private void getDayPlanning() {
         ListView lvPlanning = (ListView) view.findViewById(R.id.lv_planning);
+        lvPlanning.setAdapter(null);
 
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(LoginActivity.API_URL)
+                .baseUrl(MainActivity.API_URL)
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
 
         APIRequest request = retrofit.create(APIRequest.class);
 
-        Call<List<com.example.jordan.epiandroid.Models.Planning.Activity>> call = request.getPlannng(LoginActivity.sessionToken, date.getText().toString(), date.getText().toString());
+        Call<List<com.example.jordan.epiandroid.Models.Planning.Activity>> call = request.getPlanning(MainActivity.sessionToken, date.getText().toString(), date.getText().toString());
         call.enqueue(new Callback<List<com.example.jordan.epiandroid.Models.Planning.Activity>>() {
             @Override
             public void onResponse(Response<List<com.example.jordan.epiandroid.Models.Planning.Activity>> response) {
