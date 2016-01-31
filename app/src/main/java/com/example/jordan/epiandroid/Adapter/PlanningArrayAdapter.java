@@ -9,13 +9,23 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.example.jordan.epiandroid.APIIntra.APIRequest;
+import com.example.jordan.epiandroid.Activity.MainActivity;
 import com.example.jordan.epiandroid.Models.Planning.Activity;
+import com.example.jordan.epiandroid.Models.Token.Token;
 import com.example.jordan.epiandroid.R;
+import com.google.gson.Gson;
 
 import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.GsonConverterFactory;
+import retrofit2.Response;
+import retrofit2.Retrofit;
 
 public class PlanningArrayAdapter extends ArrayAdapter<Activity> {
     private static LayoutInflater mInflater = null;
@@ -54,11 +64,8 @@ public class PlanningArrayAdapter extends ArrayAdapter<Activity> {
         TextView tvClassroom = (TextView) convertView.findViewById(R.id.tv_classroom);
         tvClassroom.setText(current.getRoom() != null ? current.getRoom().getCode() : "N/A");
 
-        Log.d("Planning", "Registered: " + current.getEventRegistered());
         Button btnValidate = (Button) convertView.findViewById(R.id.b_validate_token);
-        if (!current.getEventRegistered().equals("registered"))
-            btnValidate.setVisibility(View.INVISIBLE);
-        else {
+        if (current.getEventRegistered().equals("registered") && current.getAllowToken())
             btnValidate.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -69,13 +76,46 @@ public class PlanningArrayAdapter extends ArrayAdapter<Activity> {
                     btnValidate.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
-                            Log.v("PlanningAdapter", "on validate token button listener, token = " + token.getText());
-                            dialog.dismiss();
+                            if (token.getText().length() == 8) {
+                                Log.v("PlanningAdapter", "on validate token button listener, token = " + token.getText());
+
+                                Retrofit retrofit = new Retrofit.Builder()
+                                        .baseUrl(MainActivity.API_URL)
+                                        .addConverterFactory(GsonConverterFactory.create())
+                                        .build();
+
+                                APIRequest request = retrofit.create(APIRequest.class);
+                                Call<Token> call = request.postToken(MainActivity.sessionToken,
+                                        current.getScolaryear(),
+                                        current.getCodemodule(),
+                                        current.getCodeinstance(),
+                                        current.getCodeacti(), current.getCodeevent(),
+                                        token.getText().toString());
+
+                                call.enqueue(new Callback<Token>() {
+                                    @Override
+                                    public void onResponse(Response<Token> response) {
+                                        Log.d("Token", "code: " + response.code());
+                                        Token r = response.body();
+
+                                        Toast.makeText(context, r.getError(), Toast.LENGTH_SHORT).show();
+                                        dialog.dismiss();
+                                    }
+
+                                    @Override
+                                    public void onFailure(Throwable t) {
+                                        Toast.makeText(context, R.string.network_error, Toast.LENGTH_SHORT).show();
+                                    }
+                                });
+                            } else
+                                Toast.makeText(context, R.string.wrong_token_format, Toast.LENGTH_SHORT).show();
                         }
                     });
                     dialog.show();
                 }
             });
+        else {
+            btnValidate.setVisibility(View.INVISIBLE);
         }
 
         return convertView;

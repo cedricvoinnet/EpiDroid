@@ -32,6 +32,7 @@
     <!--Planning Fragment-->
     <string name="btn_prev_day">&lt;&lt;</string>
     <string name="btn_validate_token">Validate token</string>
+    <string name="wrong_token_format">Token is not a token</string>
 
     <!--DashBoardFragment-->
     <string name="log_time_title">Log time :</string>
